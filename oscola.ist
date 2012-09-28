@@ -1,0 +1,6 @@
+% Part of the OSCOLA package for biblatex: see the file
+% oscola.lbx for copyright and licence information
+
+delim_0 "\\space\\dotfill\\space "
+delim_1 "\\space\\dotfill\\space "
+delim_2 "\\space\\dotfill\\space "
