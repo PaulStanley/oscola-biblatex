@@ -794,6 +794,10 @@ Next load a suitable indexing package: I'm going to assume \textsc{imakeidx}:\fo
 \begin{center}
 \verb|\usepackage{imakeidx}|
 \end{center}
+You should consult the \textsc{imakeidx} documentation for details of
+the options you might pass to \textsc{imakeidx}. But if you are
+planning to use \textsc{splitindex} you should always include the
+|splitindex| documentation.
 
 \subsection{Stage Two: Hook Up the Indexes}
 
@@ -852,41 +856,42 @@ indexed in the `cases' index.
 \index[general]{indexing!virtual indexes, list of}
 \begin{tabular}{lll}
 \toprule
-source type & hook & order \\
+source type                          & hook                  & order \\
 \midrule
-UK cases & \texttt{gbcases} & alphabetical\\
-English cases & \texttt{encases} & alphabetical\\
-Scottish cases & \texttt{sccases} & alphabetical\\
-Northern Irish cases & \texttt{nicases} & alphabetical\\
-EU cases & \texttt{eucases} & alphabetical \\
-& \texttt{eucasesnum} & by case number \\
-ECHR cases & \texttt{echrcase} & alphabetical \\
-ECHR Commission decisions & \texttt{echrcasescomm} & alphabetical \\
-International cases & \texttt{pilcases} & alphabetical \\
-Other cases & \texttt{othercases} & alphabetical \\
-UK primary legislation & \texttt{gbprimleg} & alphabetical \\
-UK draft legislation & \texttt{gbdraftleg} & alphabetical \\
-English draft legislation & \texttt{gbdraftleg} & alphabetical \\
-English primary legislation & \texttt{enprimleg} & alphabetical \\
-Scottish primary legislation & \texttt{scprimleg} & alphabetical \\
-Welsh primary legislation & \texttt{cyprimleg} & alphabetical \\
-Northern Irish primary legislation & \texttt{niprimleg} & alphabetical \\
-UK secondary legislation & \texttt{gbsecleg} & alphabetical \\
-English secondary legislation & \texttt{ensecleg} & alphabetical \\
-Rules of court & \texttt{enroc} & alphabetical \\
-Scottish secondary legislation & \texttt{scsecleg} & alphabetical \\
-Welsh secondary legislation & \texttt{cysecleg} & alphabetical \\
-Northern Irish secondary legislation & \texttt{nisecleg} & alphabetical \\
-EU Treaties & \texttt{eutreaty} & alphabetical \\
-ECHR Treaty & \texttt{echrtreaty} & alphabetical \\
-EU regulations & \texttt{euregs} & numeric \\
-EU directives & \texttt{eudirs} & numeric \\
-EU decisions & \texttt{eudecs} & numeric \\
-Other treaties & \texttt{piltreaty} & alphabetical \\
-English parliamentary material & \texttt{gbparltmat} & alphabetical \\
-EU official documents & \texttt{euoffdoc} & alphabetical \\
-Commentaries & \texttt{commentaries} & alphabetical by author \\
-Names & \texttt{namesindex} & alphabetical\\
+UK cases                             & \texttt{gbcases}      & alphabetical\\
+English cases                        & \texttt{encases}      & alphabetical\\
+Scottish cases                       & \texttt{sccases}      & alphabetical\\
+Northern Irish cases                 & \texttt{nicases}      & alphabetical\\
+EU cases                             & \texttt{eucases}      & alphabetical \\
+                                     & \texttt{eucasesnum}   & by case number \\
+ECHR cases                           & \texttt{echrcase}     & alphabetical \\
+ECHR Commission decisions            & \texttt{echrcasescomm}& alphabetical \\
+International cases                  & \texttt{pilcases}     & alphabetical \\
+Other cases                          & \texttt{othercases}   & alphabetical \\
+UK primary legislation               & \texttt{gbprimleg}    & alphabetical \\
+UK draft legislation                 & \texttt{gbdraftleg}   & alphabetical \\
+English draft legislation            & \texttt{gbdraftleg}   & alphabetical \\
+English primary legislation          & \texttt{enprimleg}    & alphabetical \\
+Scottish primary legislation         & \texttt{scprimleg}    & alphabetical \\
+Welsh primary legislation            & \texttt{cyprimleg}    & alphabetical \\
+Northern Irish primary legislation   & \texttt{niprimleg}    & alphabetical \\
+UK secondary legislation             & \texttt{gbsecleg}     & alphabetical \\
+English secondary legislation        & \texttt{ensecleg}     & alphabetical \\
+Rules of court                       & \texttt{enroc}        & alphabetical \\
+Scottish secondary legislation       & \texttt{scsecleg}     & alphabetical \\
+Welsh secondary legislation          & \texttt{cysecleg}     & alphabetical \\
+Northern Irish secondary legislation & \texttt{nisecleg}     & alphabetical \\
+EU Treaties                          & \texttt{eutreaty}     & alphabetical \\
+ECHR Treaty                          & \texttt{echrtreaty}   & alphabetical \\
+EU regulations                       & \texttt{euregs}       & numeric \\
+EU directives                        & \texttt{eudirs}       & numeric \\
+EU decisions                         & \texttt{eudecs}       & numeric \\
+Other treaties                       & \texttt{piltreaty}    & alphabetical \\
+English parliamentary material       & \texttt{gbparltmat}   & alphabetical \\
+EU official documents                & \texttt{euoffdoc}     & alphabetical \\
+Commentaries                         & \texttt{commentaries} & alphabetical 
+                                                               by author \\
+Names                                & \texttt{namesindex}   & alphabetical\\
 \bottomrule
 \end{tabular}
 \caption{Virtual Indexes\label{categories}}
@@ -905,10 +910,17 @@ tabulate = {uscases},
 ...
 \end{verbatim}
 \end{bibexample}
-Please understand that there is a difference between an index set automatically and one set using the \verb|tabulate| field. The automatic indexes are virtual. They can be redirected, and will (unless you associate them) be automatically directed to the trash index. But an index listed in the \verb|tabulate| field is passed \emph{directly} to your index command, and so if you set a tabulate field you need to make sure that such an index is created, or you will see errors.\index[general]{indexing!setting up indexes|)}
+There is a difference between an index set automatically and one set
+using the \verb|tabulate| field. The automatic indexes are
+virtual. They can be redirected, and will (unless you associate them)
+be automatically directed to the trash index. But an index listed in
+the \verb|tabulate| field is passed \emph{directly} to your index
+command, and so if you set a tabulate field you need to make sure that
+such an index is created, or you will see
+errors.\index[general]{indexing!setting up indexes|)}
 
 
-\subsection{Stage 3: Process and Print Indexes}
+\subsection{Stage Three: Process and Print Indexes}
 
 \index[general]{indexing!processing and printing|(}
 The \textsc{imakeidx} package is, in theory, able to call external
@@ -919,8 +931,8 @@ not the usual position for them in legal work.
 
 If you do want your tables\slash indexes at the end of your text, then
 you just use the ordinary \textsc{imakeidx} \verb|\printindex| command
-\index[general]{printindex@\texttt{\textbackslash printindex}}
-in the usual way. So a typical usage would look somethink like:
+\index[general]{printindex@\texttt{\textbackslash printindex}} in the
+usual way. So a typical usage would look somethink like:
 \begin{bibexample}[printindex:1]
 \begin{verbatim}
 \printindex[cases]
@@ -945,23 +957,40 @@ early stage in the document's typesetting the relevant information is
 not available.
 
 In such a case, you will necessarily have to run \textsc{splitindex}
-or \textsc{makeindex} yourself. So the `workflow' will be:
+or \textsc{makeindex} yourself. So the workflow will be:
 \begin{itemize}
 \item Run \LaTeX\ on the source code.
 \item Run \textsc{biber}.
 \item Run \LaTeX\ again, twice (to make sure all cross-references are properly generated).
-\item If you are using \textsc{splitindex}, run it to generate the actual indexes ready for typesetting.
-\item Run \LaTeX\ a final time to typeset those indexes.
+\item If you are using \textsc{splitindex}, run it on the master index
+  file to generate the actual indexes ready for typesetting. If you
+  are using \textsc{makeindex}, run it on each of the individual
+  \texttt{.idx} files to generate the actual indexes ready for typesetting.
+\item Run \LaTeX\ at least once more to typeset those indexes and
+  generate the final copy.
 \end{itemize}
 \index[general]{indexing!processing and printing|)}
 
-In most cases you will want tables of cases and legislation to be formatted with dot leaders, rather than in the default style. To achieve that you need to use the \verb|oscola.ist| style. There are two ways of doing this:
+In most cases you will want tables of cases and legislation to be
+formatted with dot leaders, rather than in the default style. To
+achieve that you need to use the \verb|oscola.ist| style. There are
+two ways of doing this:
 \begin{itemize}
-\item Run \textsc{splitindex} with the option \verb|-m|, and then process each of the resulting sub-indices that you want formatted with leaders with the option \verb|-s oscola|.
-\item Run \textsc{splitindex} with the option \verb|-- -s oscola|, which will run \textsc{makeindex} on each file with the requisite style.
+\item If you are using \textsc{makeindex}, then run it on each of the verb|.idx| files using the |-s oscola| option:
+\begin{center}
+  \texttt{makeindex} \angledtext{indexname} \texttt{-s oscola}
+\end{center}
+\item If you are using \textsc{splitindex}, run it with the option
+  \verb|-m|, and then process each of the resulting sub-indices that
+  you want formatted with leaders with the option \verb|-s oscola|.
+\item Alternatively, run \textsc{splitindex} with the option \verb|-- -s oscola|, which will run \textsc{makeindex} on each file with the requisite style.
 \end{itemize}
 
-The only real annoyance is when you have multiple indexes and want different formats. In such a case, the solution is to generate most of the indexes as set out above, and then run \textsc{makeindex} on the `oddballs' with appropriate options.
+The only real annoyance is when you have multiple indexes and want
+different formats. In such a case, the solution is to generate most of
+the indexes as set out above, and then run \textsc{makeindex} on the
+`oddballs' with appropriate options.
+
 \subsection{Some finer points}
 
 The basic method for producing indexes has been explained. There are,

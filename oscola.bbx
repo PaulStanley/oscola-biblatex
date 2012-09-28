@@ -2733,7 +2733,16 @@
 \DeclareBibliographyDriver{proceedings:index}{\usebibmacro{default:index}}
 \DeclareBibliographyDriver{inmvreference:index}{\usebibmacro{default:index}}
 \DeclareBibliographyDriver{inreference:index}{\usebibmacro{default:index}}
-\DeclareBibliographyDriver{misc:index}{\usebibmacro{default:index}}
+\DeclareBibliographyDriver{misc:index}{%
+  \iffieldequals{entrysubtype}{\undoctype}
+    {\printfield{title}%
+     \setunit{\addcomma\space}%
+     \printfield{number}%
+     \newunit
+     \iffieldundef{year}
+       {}
+       {\printtext{\mkbibparens{\printfield{year}}}}}
+   {\usebibmacro{default:index}}}
 \DeclareBibliographyDriver{booklet:index}{\usebibmacro{default:index}}
 \DeclareBibliographyDriver{techreport:index}{\usebibmacro{default:index}}
 \DeclareBibliographyDriver{manual:index}{\usebibmacro{default:index}}
@@ -3179,8 +3188,9 @@
     \step[fieldsource=entrysubtype,
           match={undoc},
           final=true]
-    \step[fieldsource=number,
-          fieldtarget=shorttitle]}
+    \step[fieldsource=number]
+    \step[fieldtarget=shorttitle,
+          origfieldval=true]}
  }
 }
 
