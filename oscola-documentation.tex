@@ -1,23 +1,42 @@
 \documentclass[a5paper,fontsize=9pt,DIV=1]{scrartcl}
-\special{5.85in,8.26in}
+
+\usepackage[pass,a5paper]{geometry}
+
 \usepackage[style=british]{csquotes}
+
 \usepackage{hyperref}
-\usepackage[style=oscola,indexing=cite,backend=biber,babel=hyphen]{biblatex}
-\usepackage[splitindex,nonewpage]{imakeidx}
+
+\usepackage[style=oscola,
+            indexing=cite,
+            backend=biber,
+            babel=hyphen]{biblatex}
+
+\usepackage[splitindex,
+            nonewpage]{imakeidx}
+
 \setcounter{secnumdepth}{3}
+
 \usepackage{tabularx}
+
 \usepackage{fontspec}
-\usepackage{enumitem}
-\usepackage{multicol}
-\usepackage{booktabs}
 \setmainfont[Ligatures = TeX,SmallCapsFont={Equity Caps B}]{Equity Text B}
 \setsansfont[Ligatures = TeX]{Franklin Gothic Medium}
+
+\usepackage{enumitem}
+\setlist[description]{%
+   font=\ttfamily\mdseries,
+   leftmargin=3.8cm,
+   labelwidth=3.6cm,
+   labelsep=0.2cm}
+
+\usepackage{multicol}
+
+\usepackage{booktabs}
+
+% Various commands and environments specific to this document
 \newcommand{\oscola}{\textsc{bl-oscola}}
 \newcommand{\biblatex}{\textsc{biblatex}}
 \newcommand{\oscolashort}{\textsc{oscola}\nocite{oscola}}
-\addbibresource{oscola-examples.bib}
-\hyphenation{am-end-ed}\hyphenation{nieu-wen-huis}
-\hyphenation{sti-cht-ing}
 \newcounter{egcounter}\setcounter{egcounter}{0}
 
 \newenvironment{bibexample}[1][]{%
@@ -28,15 +47,22 @@
 
 \newcommand{\egref}[1]{[\ref{#1}]}
 
-\setlist[description]{font=\ttfamily\mdseries,leftmargin=3.8cm,labelwidth=3.6cm,labelsep=0.2cm}
-
 \newcommand{\egcite}[1]{\texttt{\textbackslash cite#1}}
 \newcommand\angledtext[1]{$\langle$\textit{#1}\/$\rangle$}
 
-\deffootnote{1em}{1em}{\thefootnotemark\ }
+% BIBLIOGRAPHIC RESOURCES
+\addbibresource{oscola-examples.bib}
 
+% HYPHENATION
+\hyphenation{am-end-ed}\hyphenation{nieu-wen-huis}
+\hyphenation{sti-cht-ing}
+
+% TYPOGRAPHY
+
+\deffootnote{1em}{1em}{\thefootnotemark\ }
 \frenchspacing
 
+% INDEXES
 \makeindex[name=ukcases, intoc=true,
            title={Table of UK Cases}]
 \makeindex[name=eucasesa, intoc=true,
@@ -88,10 +114,10 @@
 \DeclareIndexAssociation{gbparltmat}{pmats}
 \begin{document}
 
-
 \title{The OSCOLA Biblatex Style}
+\subtitle{Version 1.1}
 
-\author{Paul Stanley\thanks{p.stanley@essexcourt.net}}
+\author{Paul Stanley\thanks{pstanley@essexcourt.net}}
 
 \maketitle
 
@@ -99,17 +125,19 @@
 
 \section{Scope}
 
-\index[general]{scope of package|(}The \oscola\ style for \biblatex\ is intended to implement more
-or less the whole of the standard for legal citations set out in the
-fourth edition of \oscolashort,\footcite{oscola} in a way that
-as far as possible respects the idea that bibliography databases
-should be style independent.\index[general]{scope of package|)} However, since it makes extensive use of
-non-standard entry-types (such as \texttt{@jurisdiction},
-\texttt{@legislation} and \texttt{@legal}), it cannot be guaranteed that
-it will be completely consistent with other legal styles.\footnote{For instance,
-  I believe that the German \textsc{jura-diss} style uses the \texttt{author}
-  field for the court that decides a case, rather than the
-  \texttt{institution} field, as \oscola\ does.}
+\index[general]{scope of package|(}The \oscola\ style for \biblatex\
+is intended to implement more or less the whole of the standard for
+legal citations set out in the fourth edition of
+\oscolashort,\footcite{oscola} in a way that as far as possible
+respects the idea that bibliography databases should be style
+independent.\index[general]{scope of package|)} However, since it
+makes extensive use of non-standard entry-types (such as
+\texttt{@jurisdiction}, \texttt{@legislation} and \texttt{@legal}), it
+cannot be guaranteed that it will be completely consistent with other
+legal styles.\footnote{For instance, I believe that the German
+  \textsc{jura-diss} style uses the \texttt{author} field for the
+  court that decides a case, rather than the \texttt{institution}
+  field, as \oscola\ does.}
 
 This document should be read alongside the \oscolashort\ standard
 itself.\footcite{oscola} Wherever possible I have taken examples from
@@ -117,25 +145,27 @@ itself.\footcite{oscola} Wherever possible I have taken examples from
 
 \subsection{Omissions\label{scope}}
 
-\index[general]{scope of package!international materials}
-The most recent edition of \oscolashort\ does not contain rules for
-formatting international law materials (other than \textsc{eu}
-materials and cases decided by the European Court of Human
-Rights). The 3rd edition contained extensive rules.\footcite[25--37]{oscola3} I have provided
-\emph{basic} functionality for citing treaties and cases consistently
-with the third edition; but the package does not attempt to grapple with all
-the complexities, and might not be sufficient for a work with
-\emph{extensive} citation of public international law materials.
+\index[general]{scope of package!international materials} The most
+recent edition of \oscolashort\ does not contain rules for formatting
+international law materials (other than \textsc{eu} materials and
+cases decided by the European Court of Human Rights). The 3rd edition
+contained extensive rules.\footcite[25--37]{oscola3} The \oscolashort\
+package offers \emph{basic} functionality for citing treaties and cases
+consistently with the third edition; but the package does not attempt
+to grapple with all the complexities, and might not be sufficient for
+a work with \emph{extensive} citation of public international law
+materials.
 
 \textsc{Bl-oscola}\index[general]{scope of package!historical cases}
-does not include citation forms for
-Yearbook or historical cases\footcite[20--21]{oscola} (other than the
-\enquote{plain vanilla} of the nominate reports and the English Reports). Nor
-does the package contain rules for the citation of foreign legal\index[general]{scope of package!non-English materials}
-materials, other than US, Canadian, Australian and New Zealand cases
-(which are cited sufficiently often in English articles to justify
-including them). There is no provision for citing legislation from
-those countries.
+does not include citation forms for Yearbook or historical
+cases\footcite[20--21]{oscola} (other than the \enquote{plain vanilla}
+of the nominate reports and the English Reports). Nor does the package
+contain rules for the citation of foreign legal\index[general]{scope
+  of package!non-English materials} materials, other than US,
+Canadian, Australian and New Zealand cases (which are cited
+sufficiently often in English articles to justify including
+them). There is no provision for citing legislation from those
+countries.
 
 To summarise:\index[general]{scope of package}
 \begin{itemize}
@@ -160,54 +190,83 @@ likely to find it significantly deficient.
 
 \subsection{Language}
 
-\index[general]{language}Since \oscola\ is an English language standard, the style does not
-contain support for other languages. Conversion to other languages
-would not necessarily be unduly difficult; but it would involve making
-adjustments which are likely to be troublesome except for very
-experienced users.
+\index[general]{language}Since \oscola\ is an English language
+standard, the style has not been designed to support other
+languages. Conversion to other languages would not necessarily be
+unduly difficult; but it would involve making adjustments which are
+likely to be troublesome except for very experienced users.
+
+The style will, by default, set the \biblatex\ language option to
+\texttt{english}.
 
 \section{Some thanks, an apology, a warning, a promise}
 
 \subsection{Thanks}
 
-There are many people I should thank. \index[general]{Lehman, Philip}Philip Lehman and \index[general]{Kime, Philip}Philip Kime, together with the current \biblatex\ maintainers Audrey Boruvka and Joseph Wright -- without whom this would be impossible. Many members of the community at \TeX-StackExchange\footnote{\url{tex.stackexchange.com}} have helped too. I've borrowed from more people than I can remember. Thanks to everyone.
+There are many people I should thank. \index[general]{Lehman,
+  Philip}Philip Lehman and \index[general]{Kime, Philip}Philip Kime,
+together with the current \biblatex\ maintainers Audrey Boruvka and
+Joseph Wright -- without whom this would be impossible. Many members
+of the community at
+\TeX-StackExchange\footnote{\url{tex.stackexchange.com}} have helped
+too. I've borrowed from more people than I can remember. Daniel
+H\"ogger identified various important bugs, and suggested numerous
+improvements. Thanks to everyone.
 
 \subsection{An apology}
 
-Thanks \ldots\ and sorry. Sorry if you read the code, which is sometimes muddled. Knowing what I know now, I would not start where I started, or end where I ended. There's plenty of cleanup to be done, but at least it works, and it seems better to release it, unpolished.
+Thanks \ldots\ and sorry. Sorry if you read the code, which is
+sometimes muddled. Knowing what I know now, I would not start where I
+started, or end where I ended. There's plenty of cleanup to be done,
+but at least it works, and it seems better to release it, unpolished.
 
 \subsection{A warning}
 
-At least it works \ldots\ except when it doesn't. Of course there are going to be problems: corner cases I haven't caught in testing, things I've not thought about, decisions that turn out to be wrong. It's not just not guaranteed not to be buggy, it's guaranteed to be buggy.\index[general]{bugs!guaranteed}
+At least it works \ldots\ except when it doesn't. Of course there are
+going to be problems: corner cases I haven't caught in testing, things
+I've not thought about, decisions that turn out to be wrong. It's not
+just not guaranteed not to be buggy, it's guaranteed to be
+buggy.\index[general]{bugs!guaranteed}
 
 \subsection{A promise}
 
-It's guaranteed to be buggy \ldots\ but I promise to do what I can. Not a legally binding promise, mind, but a promise binding in honour that if something isn't working, and you need it working, I will do my best to fix it as quickly as I can. Especially if you are using this for serious work. Email me. Really.\index[general]{bugs!reporting}
+It's guaranteed to be buggy \ldots\ but I promise to do what I
+can. Not a legally binding promise, mind, but a promise binding in
+honour that if something isn't working, and you need it working, I
+will do my best to fix it as quickly as I can. Especially if you are
+using this for serious work. Email
+me. Really.\index[general]{bugs!reporting}
 
 \section{For Absolute Beginners}
 
-\index[general]{Biblatex!introduction to|(}\index[general]{Biber!introduction to|(}Few lawyers use \LaTeX, so perhaps it would be reasonable to assume
-that those who do have a fairly good idea of how it
-works. Nevertheless, this section gives a \emph{very} short and simple
-introduction to using \biblatex, and \textsc{biber} to create
-bibliographies. Infinitely more detail can be found in the \biblatex\ documentation,\footcite{biblatex2} which is essential reading.
+\index[general]{Biblatex!introduction
+  to|(}\index[general]{Biber!introduction to|(}Few lawyers use \LaTeX,
+so perhaps it would be reasonable to assume that those who do have a
+fairly good idea of how it works. Nevertheless, this section gives a
+\emph{very} short and simple introduction to using \biblatex, and
+\textsc{biber} to create bibliographies. Infinitely more detail can be
+found in the \biblatex\ documentation,\footcite{biblatex2} which is
+essential reading.
 
-The idea is this. You have two files: the file (or files) that containing your
-document, and separate file(s) containing bibliographical
-information about the works you may cite. Instead of typing out a
-citation to the work in question, you use a simple command to refer to
-it by a label you have selected and included in your bibliography
-database. The system then takes care of all the tedious details:
-formatting citations, keeping track of `ibid' or back references to
-the first citation, giving full details in the bibliography, making a
-table of cases and statutes, and so forth.
+The idea is this. You have two files: the file (or files) that
+containing your document, and separate file(s) containing
+bibliographical information about the works you may cite. Instead of
+typing out a citation to the work in question, you use a simple
+command to refer to it by a label you have selected and included in
+your bibliography database. The system then takes care of all the
+tedious details: formatting citations, keeping track of `ibid' or back
+references to the first citation, giving full details in the
+bibliography, making a table of cases and statutes, and so forth.
 
-The work-flow is as follows:\index[general]{work-flow!in general} (1) run \LaTeX, (2) run
-\textsc{biber}---the program that reads the files produced by \LaTeX
-on its first run, and uses them to prepare references in a digestible
-form for \LaTeX, (3) run \LaTeX\ again. Often you will also need (4)
-to run a program to construct tables of cases and so forth, and (5)
-usually to run \LaTeX\ at least once more to get everything in order.\index[general]{Biblatex!introduction to|)}\index[general]{Biber!introduction to|)}
+The work-flow is as follows:\index[general]{work-flow!in general} (1)
+run \LaTeX, (2) run \textsc{biber}---the program that reads the files
+produced by \LaTeX on its first run, and uses them to prepare
+references in a digestible form for \LaTeX, (3) run \LaTeX\
+again. Often you will also need (4) to run a program to construct
+tables of cases and so forth, and (5) usually to run \LaTeX\ at least
+once more to get everything in
+order.\index[general]{Biblatex!introduction
+  to|)}\index[general]{Biber!introduction to|)}
 
 \subsection{What you need}
 

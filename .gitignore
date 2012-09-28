@@ -163,12 +163,17 @@ pip-log.txt
 .DS_Store
 
 # TeX Stuff
-.aux
-.ind
-.idx
-.bbl
-.bcf
-.toc
+*.aux
+*.ind
+*.idx
+*.bbl
+*.bcf
+*.toc
+*.blg
+*.log
+*.out
+*.pdf
+*.run.xml
 
 #EMACS
 \#*#
