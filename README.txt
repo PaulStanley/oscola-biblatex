@@ -10,9 +10,9 @@ FILES AND LICENCE
 =================
 
 The package consists of three principal files (oscola.bbx, oscola.cbx
-and english-oscola.lbx) which should be placed where biblatex can find
-them, documentation (oscola-documentation.pdf), and a very short index
-style file (oscola.ist). Those files are copyright (c) Paul Stanley 2012.
+and english-oscola.lbx) which should be placed, documentation
+(oscola-documentation.pdf), and a very short index style file
+(oscola.ist). Those files are copyright (c) Paul Stanley 2012.
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License, either version 1.3
@@ -23,8 +23,8 @@ The latest version of the license is in
 and version 1.3 or later is part of all distributions of LaTeX
 version 2005/12/01 or later.
 
-This work has the LPPL maintenance status 'maintained'.
-The current maintainer of this work is Paul Stanley (pstanley@essexcourt.net)
+This work has the LPPL maintenance status 'maintained'. The current
+maintainer of this work is Paul Stanley (pstanley@essexcourt.net)
 
 The documentation consists of oscola-documentation.pdf and
 oscola-examples.bib. Those files are distributed under the Creative
@@ -47,9 +47,9 @@ the local tree) is as follows:
 oscola.bbx: With the bibliography style files in 
             ...tex/latex/biblatex/bbx
 oscola.cbx: With the citation style files in
-            .../tex/latex/\linebreak biblatex/cbx
+            .../tex/latex/biblatex/cbx
 english-oscola.lbx: With the language definition files in
-            .../tex/latex/\linebreak biblatex/lbx
+            .../tex/latex/biblatex/lbx
 oscola-documentation.pdf: With documentation in a suitable directory 
             under .../doc/latex
 oscola.ist: With the index style files in 
@@ -60,4 +60,7 @@ oscola-examples.bib: With the sample bibliography files in a suitable
 VERSION HISTORY
 ===============
 
-August 2012: Version 0.1 released.
+August 2012      Version 1	Original release
+
+September 2012   Version 1.1	Various bugfixes and corrections to
+	  	 	 	the documentation.

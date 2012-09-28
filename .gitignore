@@ -169,3 +169,6 @@ pip-log.txt
 .bbl
 .bcf
 .toc
+
+#EMACS
+\#*#
