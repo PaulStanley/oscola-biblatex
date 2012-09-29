@@ -1,7 +1,5 @@
 \documentclass[a5paper,fontsize=9pt,DIV=1]{scrartcl}
 
-%%%	THIS IS JUST TO TEST GIT AND SEE IF IT IS WORKING
-
 \usepackage[pass,a5paper]{geometry}
 
 \usepackage[style=british]{csquotes}
@@ -44,7 +42,7 @@
 \newenvironment{bibexample}[1][]{%
   \medskip\par\small\noindent\ignorespaces
   \marginpar{[\refstepcounter{egcounter}\arabic{egcounter}]\label{#1}}
-  \begin{minipage}[t]{0.95\textwidth}}
+  \begin{minipage}[t]{0.95\linewidth}}
  {\end{minipage}\par\medskip}
 
 \newcommand{\egref}[1]{[\ref{#1}]}
@@ -212,7 +210,7 @@ Joseph Wright -- without whom this would be impossible. Many members
 of the community at
 \TeX-StackExchange\footnote{\url{tex.stackexchange.com}} have helped
 too. I've borrowed from more people than I can remember. Daniel
-H\"ogger identified various important bugs, and suggested numerous
+H\"ogger identified various important bugs, and suggested
 improvements. Thanks to everyone.
 
 \subsection{An apology}
@@ -373,20 +371,26 @@ for printing short references to the EU treaty, and without making use
 of `ibid' in successive citations.
 
 \begin{description}
-\item[\texttt{eutreaty}]\index[general]{customization!EU treaties, shortened form}\index[general]{options!eu-treaty@\texttt{eu-treaty}}\index[general]{EU treaties!shortened citations} If\label{options} set to \texttt{alternative}, then
-  shortened references to an EU treaty will be printed in the form
-  `Art 23 TFEU' rather than `TFEU, Art 23'. The latter is, I think,
-  strictly required by \oscolashort;\footcite[29]{oscola} but the
-  alternative version is so common in writing by \textsc{eu}
-  specialists that it seemed sensible to provide it as a possibility.
-\item[\texttt{caseshorthands}]\index[general]{customization!shorthand case names}\index[general]{shorthands!case names, italic}\index[general]{options!casesshorthands@\texttt{casesshorthands}} As I read it, \oscolashort\
-  distinguishes between the short \emph{titles} of cases and
-  abbreviations for cases (what we would call `shorthands') by
-  printing short titles in italic, and abbreviations in roman
-  type.\footcite[See `example 4'][15]{oscola} To my eye that looks
-  odd. The option \texttt{caseshorthands=italic} will see to it that
-  shorthand names for cases, like their short titles, will be
-  printed in italic type.
+\item[\texttt{eutreaty}]\index[general]{customization!EU treaties,
+  shortened
+  form}\index[general]{options!eu-treaty@\texttt{eu-treaty}}\index[general]{EU
+  treaties!shortened citations} If\label{options} set to
+  \texttt{alternative}, then shortened references to an EU treaty will
+  be printed in the form `Art 23 TFEU' rather than `TFEU, Art 23'. The
+  latter is, I think, strictly required by
+  \oscolashort;\footcite[29]{oscola} but the alternative version is so
+  common in writing by \textsc{eu} specialists that it seemed sensible
+  to provide it as a possibility.
+\item[\texttt{caseshorthands}]\index[general]{customization!shorthand
+  case names}\index[general]{shorthands!case names,
+  italic}\index[general]{options!casesshorthands@\texttt{casesshorthands}}
+  As I read it, \oscolashort\ distinguishes between the short
+  \emph{titles} of cases and abbreviations for cases (what we would
+  call `shorthands') by printing short titles in italic, and
+  abbreviations in roman type.\footcite[See `example 4'][15]{oscola}
+  To my eye that looks odd. The option \texttt{caseshorthands=italic}
+  will see to it that shorthand names for cases, like their short
+  titles, will be printed in italic type.
 \item[ibidstyle]\index[general]{customization!ibid}
                 \index[general]{ibid!capitalization}
                 \index[general]{options!ibidstyle@\texttt{ibidstyle}}
@@ -400,17 +404,16 @@ of `ibid' in successive citations.
   if you are using capitals, you will need to insert the command
   \verb|\bibsentence| immediately before the \verb|\cite|. (This is a
   good reason to use \verb|\footcite| where you can.\label{ibidstyle})
-\item[\texttt{ibidtracker}]
-                 \index[general]{customization!ibid}
-                 \index[general]{options!ibidtracker@\texttt{ibidtracker}}
-                 \index[general]{ibid!disabling
-    use of} \textsc{Oscola} permits citations to use `ibid' where
-  there is an unambiguous citation to a single authority in the
-  preceding footnote, but it is not required.\footnote{`\ldots\ you
-    \emph{can} generally use ``ibid'' instead' (emphasis added)
-    \cite[5]{oscola}.} By default, \oscola\ does use `ibid', where it
-  is appropriate. But if you prefer to switch it off, you can do so
-  using the \biblatex\ option \texttt{ibidtracker=false}.
+\item[\texttt{ibidtracker}] \index[general]{customization!ibid}
+  \index[general]{options!ibidtracker@\texttt{ibidtracker}}
+  \index[general]{ibid!disabling use of} \textsc{Oscola} permits
+  citations to use `ibid' where there is an unambiguous citation to a
+  single authority in the preceding footnote, but it is not
+  required.\footnote{`\ldots\ you \emph{can} generally use ``ibid''
+    instead' (emphasis added) \cite[5]{oscola}.} By default,
+  \oscola\ does use `ibid', where it is appropriate. But if you prefer
+  to switch it off, you can do so using the \biblatex\ option
+  \texttt{ibidtracker=false}.
 \item[\texttt{citetracker}]
                  \index[general]{customization!shortened citations}
                  \index[general]{options!citetracker@\texttt{citetracker}}
@@ -427,6 +430,15 @@ of `ibid' in successive citations.
   standard requires full citations if the previous citation was
   in an earlier chapter, but \oscola\ will take care of that for
   you if you use an appropriate \texttt{refsegment} option.\footcite[57]{biblatex2}\index[general]{customization|)}
+
+It is possible to use \enquote{ibid} without the
+\verb|citetracker|. But turning the \verb|citetracker| off will affect
+the treatment of shorthands, which will be disregarded.
+\item[shortindex] By default, \oscola\ produces full citations for
+  cases when printing indexes (see p \pageref{index:format} below). If
+  you prefer a simpler format, where tables\slash indexes contain only
+  the title and year of the case, use to option \texttt{shortindex}
+  when loading \biblatex.
 \end{description}
 
 \section{The Bibliographic Database}
@@ -542,8 +554,8 @@ A
 \textsc{yyyy-mm-dd}:
 
 \begin{description}[labelwidth=5cm, leftmargin=5.3cm]
-\item[{1970-04-02}] 2 February 1970
-\item[{1990-01-03/1991-10-30}] 1 March 1990--30 October 1991
+\item[{1970-04-02}] 4 February 1970
+\item[{1990-01-03/1991-10-30}] 3 January 1990--30 October 1991
 \end{description}
 
 In many cases it is unnecessary to enter a complete date (though it is
@@ -614,7 +626,7 @@ Another difficulty you will find with making sure you get clean
 linebreaks is hyphenation. You can do two things to help. First, add
 explicit hyphenation in difficult cases. Secondly, if a citation is
 predominantly in a non-English language, set the \texttt{hyphenation}
-field in the entry to the relevant language.
+field in the entry to the relevant language. (You should, then, pass the option \texttt{hyphenation\allowbreak=\allowbreak babel} to \biblatex.)
 
 \subsubsection{Quotations}
 
@@ -633,7 +645,7 @@ database file to be usable with different styles. Example
 \section{Citation Commands}
 
 \index[general]{citation commands|(}
-As the standard makes clear, `OSCOLA is a footnote style: all
+As the standard makes clear, `\textsc{oscola} is a footnote style: all
 citations appear in footnotes'.\footcite[3]{oscola} The \oscola\
 package assumes you are following this approach.
 
@@ -934,7 +946,7 @@ not the usual position for them in legal work.
 If you do want your tables\slash indexes at the end of your text, then
 you just use the ordinary \textsc{imakeidx} \verb|\printindex| command
 \index[general]{printindex@\texttt{\textbackslash printindex}} in the
-usual way. So a typical usage would look somethink like:
+usual way. So a typical usage would look something like:
 \begin{bibexample}[printindex:1]
 \begin{verbatim}
 \printindex[cases]
@@ -1079,7 +1091,7 @@ shows the use of additional reports for listing in the index):
 This will produce an index entry of:
 \begin{quote}
 \citeinindex{antaios85}
-\end{quote}
+\end{quote}\label{index:format}
 
 But you also need to add an entry for its ship's name. To do that, assuming the relevant index is called \texttt{ukcases}, you would simply write:
 \begin{verbatim}
@@ -1335,7 +1347,7 @@ further information.
 This field is used to provide a list
 of additional reports. The list is intended for use only in the index
 or table of cases, and can be used if you want to provide
-comprehensive details about all possible reports of a case. Items should be separated by `and': see Example \ref{antaios85}. By default, a comma is printed between items. If you prefer some other delimiter, redefine \verb|\extracitedelim|.\index[general]{extracitedelim@\texttt{\textbackslash extracitesdelim}}
+comprehensive details about all possible reports of a case. Items should be separated by `and': see example \ref{antaios85}. By default, a comma is printed between items. If you prefer some other delimiter, redefine \verb|\extracitedelim|.\index[general]{extracitedelim@\texttt{\textbackslash extracitesdelim}}
 \end{description}
 \index[general]{cases!fields|)}
 
@@ -1517,14 +1529,14 @@ usage.
 \end{description}
 
 Note: (1) it was not necessary to specify that the year was essential
-in Example \ref{page96} because there is no volume number, so it can
-be assumed to be essential, but it was necessary to do so in Example
+in example \ref{page96} because there is no volume number, so it can
+be assumed to be essential, but it was necessary to do so in example
 \ref{corr08}, because there is a volume number there, so \oscola\
 cannot infer that the year is essential. (2) As explained above,
 although there was information about the institution included in the
-bibliography data for Example \ref{corr08}, \oscola\ knew that it
+bibliography data for example \ref{corr08}, \oscola\ knew that it
 could be ignored. It also correctly stripped out full points. (3) The
-\texttt{pagination} field of Example \ref{corr08} ensures that
+\texttt{pagination} field of example \ref{corr08} ensures that
 pinpoints are correctly formatted.
 
 Now let's look at a case where the year is not
@@ -1556,7 +1568,7 @@ If you have a case that is unreported, just leave the
 will depend on whether there is a neutral citation in the
 \texttt{number} field. (If there isn't a neutral
 citation, \oscolashort\ requires you to give, if you can, a
-precise date, not just a year: see Example \ref{stubbs90}.)
+precise date, not just a year: see example \ref{stubbs90}.)
 
 \begin{bibexample}[stubbs90]
 \begin{verbatim}
@@ -2236,7 +2248,7 @@ be to a paragraph -- will be printed after the report information;
 there may also be fewer commas. So whereas McGill would
 have \begin{center} \emph{Clearbrook Ironworks Ltd v Letorneau}, 2006
   FCA 42 \textbf{at para 3}, 46 CPR (4th) 241
-\end{center} \oscola\ will produce \begin{center} \cite[3]{clearbrook}
+\end{center} \oscola\ will produce \begin{center} \cite{clearbrook}, \textbf{para 3}
 \end{center}
 
 \begin{bibexample}[clearbrook]
@@ -3885,7 +3897,7 @@ manually.
 \index[general]{periodical literature|see {articles}}
 
 Citation of periodical literature using \oscola\ is essentially the
-same as in stnardard \biblatex, with two truly special cases: articles
+same as in standard \biblatex, with two truly special cases: articles
 in newspapers and case notes. All should be given the entrytype
 \texttt{@article}.
 
@@ -4004,7 +4016,7 @@ Where an article has appeared in a newspaper, slightly different styling is requ
   title        = {Supreme Court Warns on Quality},
   author       = {Jane Croft},
   journaltitle = {Financial Times},
-  address      = {London},
+  location     = {London},
   date         = {2010-07-01},
   pages        = {3},
   entrysubtype = {newspaper},
@@ -4065,7 +4077,7 @@ format.\footnote{\cite{jameel04}; \cite[see][]{rowbottom07}.}
 \section{Reports}
 \index[general]{reports|(}
 
-Reports are relatively straigtforward:
+Reports are relatively straightforward:
 \begin{itemize}
 \item Some documents entitled `report' are actually books. If they
   have an \textsc{isbn} number they should be treated as books and
@@ -4168,7 +4180,7 @@ series. So
 If you need to specify the type of report (eg `Green Paper', or `White
 Paper'), put it in the \texttt{type} field (see example \ref{eliminating:poverty}).
 
-\subsubsection{Examples: OSCOLA 40--41}
+\subsubsection{Examples}
 
 \index[general]{reports!examples|(}
 \begin{bibexample}[rc:capital3]
@@ -4305,7 +4317,7 @@ First,\label{hansard:examples} set up `master' entries for
 
 Now, for any individual debate that you want to reference, set up an
 individual entry along the following lines (for the 2nd reading of the
-Bill that became Freedom of Information Act 2000:
+Bill that became Freedom of Information Act 2000):
 \begin{bibexample}[foia:2r]
 \begin{verbatim}
 @legal{foia:2r,
@@ -4502,8 +4514,8 @@ year and number.
 
 \section{Miscellaneous Other Resources}
 
-There is also support for citation of theses, letters, emails and
-interviews in accordance with
+There is also support for citation of theses, letters, conference
+papers, emails and interviews in accordance with
 \oscolashort.\footcite[42--43]{oscola} These hardly warrant detailed
 consideration, and so a few examples should suffice.
 
@@ -4649,7 +4661,7 @@ to be `creative' in the way you use fields to get the citation
 correct. For instance, while example \ref{greenleaf10} works out
 perfectly using conventional fields, the particular preferences of the
 \emph{Duke Law and Technology Review} (for a date without any
-brackets, and an issue number with leading zeros) could onlyl be met
+brackets, and an issue number with leading zeros) could only be met
 by including this information in the \texttt{journaltitle}.
 
 \begin{bibexample}[greenleaf10]
@@ -4675,8 +4687,7 @@ by including this information in the \texttt{journaltitle}.
   title        = {A Manifesto on WIPO and 
                   the Future of Intellectual 
                   Property},
-  journaltitle = {2004 Duke L \& Tech 
-                  Review 0009},
+  journaltitle = {2004 Duke L \& Tech Review 0009},
   url={http://dltr.law.duke.edu/2004/09/08/a-manifesto-on-
 wipo-and-the-future-of-intellectual-property},
   urldate      = {2012-07-18},
