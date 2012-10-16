@@ -4691,6 +4691,7 @@ by including this information in the \texttt{journaltitle}.
   url={http://dltr.law.duke.edu/2004/09/08/a-manifesto-on-
 wipo-and-the-future-of-intellectual-property},
   urldate      = {2012-07-18},
+  options      = {url=true},
 }
 \end{verbatim}
 \end{bibexample}
@@ -4758,6 +4759,19 @@ So, for instance, example \ref{melbourne} shows the citation of a book with a \t
 \begin{description}
 \item[\egcite{\{loader\}}] \cite{loader}
 \end{description}
+
+\subsubsection{Controlling whether \textsc{url}s are printed}
+\index[general]{urls@\textsc{url}s!controlling printing}
+\index[general]{options!url@\texttt{url}}
+\index[general]{options field@\texttt{options} field!url option@\texttt{url} option}
+If you load \biblatex\ with the option \texttt{url=false}, then the
+printing of \textsc{url}s will generally be supressed. However, they
+will still be printed for sources that have been given the
+\texttt{online} type, and you can also override this on an
+item-by-item basis, by setting the \texttt{url} option for that
+particular source. This is obviously recommended for any source which
+does not have the \texttt{online} type, but is only available
+electronically. You can see it in example \ref{boyle04}.
 
 \subsection{Formatting of URLs}
 

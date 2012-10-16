@@ -1041,6 +1041,21 @@
   \global\toggletrue{cbx@postnoteprinted}%
   \newunit\newblock}
 
+\renewbibmacro*{doi+eprint+url}{%
+  \iftoggle{bbx:doi}
+    {\printfield{doi}}
+    {}%
+  \newunit\newblock
+  \iftoggle{bbx:eprint}
+    {\usebibmacro{eprint}}
+    {}%
+  \newunit\newblock
+  \ifboolexpr{ test {\iftoggle{bbx:url}}
+               or test {\ifentrytype{online}}}
+    {\usebibmacro{url+urldate}}
+    {}}
+
+
 \newbibmacro*{echrreports}{%
   \printfield{journaltitle}%
   \newunit
