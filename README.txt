@@ -62,5 +62,5 @@ VERSION HISTORY
 
 August 2012      Version 1	Original release
 
-September 2012   Version 1.1	Various bugfixes and corrections to
-	  	 	 	the documentation.
+November 2012   Version 1.1	Various bugfixes and corrections to
+	  	 	 	the documentation
