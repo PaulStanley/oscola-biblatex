@@ -252,7 +252,7 @@
 \newcommand*\eudirective{directive}
 \newcommand*\euregulation{regulation}
 \newcommand*\eudecision{decision}
-\newcommand*\treatysubtype{treaty}
+\newcommand*\treatysubtype{piltreaty}
 \newcommand*\comdocsubtype{comdoc}
 \newcommand*{\jurisechr}{echr}
 \providecommand*\eutreaty{eu-treaty}
@@ -583,7 +583,8 @@
       {\usebibmacro{legal:parliamentary}}
       {\iffieldequals{entrysubtype}{\treatysubtype}
          {\usebibmacro{treatycitation}}
-         {\usebibmacro{treatycitation}}}}
+         {\usebibmacro{treatycitation}}}}%
+  \newunit\newblock
   \usebibmacro{legislation:note}%
   \newunit\newblock
   \setunit{\bibpagerefpunct}%
@@ -2259,9 +2260,7 @@
   \newunit\newblock
   \usebibmacro{treatyinfo}%
   \newunit\newblock
-  \usebibmacro{treaty:year+vol+report}%
-  \newunit\newblock
-  \newunit\newblock}
+  \usebibmacro{treaty:year+vol+report}}
 
 \newbibmacro{treaty:year+vol+report}{%
   \iffieldequals{journaltitle}{\officialjournaltitle}
@@ -2276,7 +2275,7 @@
     {}
     {\newunit
      \printfield{series}%
-     \setunit{\addspace}}
+     \setunit{\addspace}}%
  \printfield{pages}}}%
 
 \newbibmacro*{treaty:date}{%
@@ -2418,7 +2417,7 @@
 \renewcommand\bbx@eudirs{eulegislation}
 \renewcommand\bbx@eudecs{eulegislation}
 \renewcommand\bbx@echrtreaty{echrtreaty}
-\renewcommand\bbx@piltreaty{treaty}
+\renewcommand\bbx@piltreaty{piltreaty}
 \renewcommand\bbx@otherprimleg{legislation}
 \renewcommand\bbx@othersecleg{legislation}
 \renewcommand\bbx@otherconleg{legislation}
@@ -2503,8 +2502,7 @@
        {}%
    \ifboolexpr{ test {\ifentrytype{legal}}%
                 and test {\iffieldequals{entrysubtype}{\treatysubtype}} }%
-          {\ifkeyword{int}{\renewcommand{\bbx@relevantindex}{[\bbx@piltreaty]}}{}%
-           \ifkeyword{echr}{\renewcommand{\bbx@relevantindex}{[\bbx@echrtreat]}}{}}{}%
+          {\ifkeyword{echr}{\renewcommand{\bbx@relevantindex}{[\bbx@echrtreaty]}}{\renewcommand{\bbx@relevantindex}{[\bbx@piltreaty]}}}{}%
    \iffieldequals{entrysubtype}{\parliamentarytype}%
       {\renewcommand{\bbx@relevantindex}{[\bbx@gbparltmat]}}%
       {}%

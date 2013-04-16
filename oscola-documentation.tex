@@ -3194,6 +3194,10 @@ get indexed properly.
 
 Treaties use the following fields:
 \begin{description}
+\item[entrysubtype]
+\index[general]{entrysubtype field@\texttt{entrysubtype} field!treaties@public international law treaties}
+\index[general]{bibfile@\texttt{.bib} file!entrysubtype field@\texttt{entrysubtype} field}
+This should be set to \texttt{piltreaty}.
 \item[title] 
 \index[general]{title field@\texttt{title} field!treaties@in treaties}
 \index[general]{bibfile@\texttt{.bib} file!title field@\texttt{title} field}
@@ -3286,7 +3290,7 @@ will be printed, without any narrative.
   volume       = {2351},
   journaltitle = {UNTS},
   pages        = {13},
-  entrysubtype = {treaty},
+  entrysubtype = {piltreaty},
 }
 \end{verbatim}
 \end{bibexample}
@@ -3303,7 +3307,7 @@ will be printed, without any narrative.
   volume       = {9},
   journaltitle = {LNTS},
   pages        = {211},
-  entrysubtype = {treaty},
+  entrysubtype = {piltreaty},
 }
 \end{verbatim}
 \end{bibexample}
@@ -3318,7 +3322,7 @@ will be printed, without any narrative.
   issue       = {264},
   pages       = {1},
   date        = {1978},
-  entrysubtype= {treaty},
+  entrysubtype= {piltreaty},
 }
 \end{verbatim}
 \end{bibexample}
@@ -3339,18 +3343,19 @@ The `note' form can be used where it is necessary to give additional information
 \begin{bibexample}[echr:treaty]
 \begin{verbatim}
 @legal{echr:treaty,
-  title     = {Convention for the Protection of Human Rights 
-               and Fundamental Freedoms},
-  execution = { opened=1950-11-04 and inforce=1953-09-03 },
-  volume    = {213},
-  reporter  = {U.N.T.S.},
-  pages     = {221},
-  note      = {as amended by Protocol No 14bis to the Convention 
-               for the Protection of Human Rights and
-               Fundamental Freedoms 
-              (opened for signature 27 May 2009, entered into force
-              1 September 2009) CETS No 204},
-  shorthand = {ECHR},
+  title        = {Convention for the Protection of Human Rights 
+                  and Fundamental Freedoms},
+  execution    = { opened=1950-11-04 and inforce=1953-09-03 },
+  volume       = {213},
+  reporter     = {U.N.T.S.},
+  pages        = {221},
+  note         = {as amended by Protocol No 14bis to the Convention 
+                  for the Protection of Human Rights and
+				  Fundamental Freedoms 
+                  (opened for signature 27 May 2009, entered into force
+                   1 September 2009) CETS No 204},
+  shorthand    = {ECHR},
+  entrysubtype = {piltreaty},
 }
 \end{verbatim}
 \end{bibexample}

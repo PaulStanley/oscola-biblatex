@@ -60,7 +60,7 @@
                   or test {\bbx@ifnottrackingcites}}
        {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
           {\usebibmacro{footcite:ibid}}
-          {\usebibmacro{footcite:note}}}
+          {\usebibmacro{footcite:note}}}%
        {\usebibmacro{footcite:shorthand}}}
     {\usebibmacro{footcite:full}%
      \usebibmacro{footcite:save}}}
@@ -108,6 +108,7 @@
   \setunit*{\nametitledelim}%
   \printtext[bibhyperlink]{%
     \printfield[citetitle]{labeltitle}}}
+	
 
 \newbibmacro*{cite:miscshort}{%
   \iffieldundef{shorttitle}
@@ -259,7 +260,7 @@
     {\usebibmacro{cite:shortleg}}
     {\ifboolexpr{(
        test {\ifentrytype{commentary}} 
-       or (test {\ifentrytype{legal}} and not test {\iffieldequals{entrysubtype}{\treatysubtype}} ) 
+       or (test {\ifentrytype{legal}} and not test {\iffieldequals{entrysubtype}{\treatysubtype}} )
        or (test {\ifentrytype{jurisdiction}} 
          and (not test {\iffieldundef{userc}}) 
          and (not test {\iffieldundef{postnote}})))}%
@@ -271,9 +272,10 @@
 \renewbibmacro*{footcite:note}{%
   \ifboolexpr{test {\ifentrytype{legislation}} 
               or ( test {\ifentrytype{legal}} 
-                   and not test {\iffieldequals{entrysubtype}{\treatysubtype}} )}%
+                   and ( not test {\iffieldequals{entrysubtype}{\treatysubtype}} ))}%
     {\usebibmacro{cite:short}}%
-    {\ifentrytype{commentary}%
+    {\ifboolexpr{ test {\ifentrytype{commentary}} 
+	               or  ( test {\ifentrytype{legal}} and not test {\iffieldequals{entrysubtype}{\treatysubtype}}) }%
       {\usebibmacro{footcite:full}}%
       {\ifboolexpr{ ( test {\ifentrytype{jurisdiction}} 
                       and 
