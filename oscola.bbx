@@ -444,7 +444,7 @@
   \usebibmacro{author/translator+others}%
   \setunit{\addcomma\space}\newblock
   \usebibmacro{journaltitle}%
-  \setunit{\addspace}
+  \setunit{\addspace}%
   \printlist{language}%
   \setunit{\addspace}\newblock
   \usebibmacro{byauthor}%
@@ -456,11 +456,11 @@
   \usebibmacro{journal+issuetitle}%
   \setunit{\addspace}\newblock
   \usebibmacro{byeditor+others}%
-  \setunit{\addspace}
+  \setunit{\addspace}%
   \usebibmacro{note+pages}%
-  \setunit{\addspace}
+  \setunit{\addspace}%
   \usebibmacro{doi+eprint+url}%
-  \setunit{\addspace}
+  \setunit{\addspace}%
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}%
   \usebibmacro{pageref}%
@@ -1398,10 +1398,10 @@
      \newunit
      \printtext{\mkbibparens{%
        \iflistundef{location}
-         {}
+         {}%
          {\printlist{location}%
           \setunit{\addcomma\space}}%
-       \usebibmacro{date}}}}
+       \usebibmacro{date}}}\newunit}
   {\usebibmacro{journaldate}%
   \newunit
   \usebibmacro{volume+number+eid}%
@@ -1623,8 +1623,8 @@
 
 \renewbibmacro{note+pages}{%
   \printfield{pages}%
-  \setunit{\addspace}
-  \printfield{note}
+  \setunit{\addspace}%
+  \printfield{note}%
   \newunit}
 
 \newbibmacro{online:title}{%
