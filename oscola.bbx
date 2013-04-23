@@ -13,7 +13,7 @@
 % This work has the LPPL maintenance status 'maintained'.
 % The current maintainer of this work is Paul Stanley (pstanley@essexcourt.net)
 
-\ProvidesFile{oscola.bbx}[2012/09/27 v1.1A Biblatex bibliography style for OSCOLA standard] 
+\ProvidesFile{oscola.bbx}[2013/04/23 v1.1C Biblatex bibliography style for OSCOLA standard] 
 
 \RequireBibliographyStyle{authortitle}
 
@@ -407,10 +407,13 @@
 \DeclareFieldFormat[thesis]{title}{\mkbibquote{#1}}
 \DeclareFieldFormat[misc]{title}{#1}
 \DeclareFieldFormat[misc]{journaltitle}{\mkbibquote{#1}}
+\DeclareFieldFormat[misc]{pages}{\mkfirstpage*{#1}}
+\DeclareFieldFormat[misc]{volume}{#1}
 \DeclareFieldFormat{casenotetitle}{\mkbibquote{\mkbibemph{#1}}}
 \DeclareFieldFormat{usseries}{\ifinteger{#1}{\mkusbibordinal{#1}}{#1}}
 \DeclareFieldFormat[legislation]{title}{#1}
 \DeclareFieldFormat[legal]{title}{#1}
+\DeclareFieldFormat{untitle}{#1}
 
 \DeclareListFormat[jurisdiction]{extracites}{%
   \extracitedelim #1}
@@ -658,19 +661,15 @@
 \DeclareBibliographyDriver{misc}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/editor+others/translator+others}%
+  \iffieldequals{entrysubtype}{\undoctype}
+  {\usebibmacro{undoc}}
+  {\usebibmacro{author/editor+others/translator+others}%
   \setunit*{\addcomma\space}%
   \usebibmacro{misctitle}%
   \newunit\newblock
-  \iffieldequals{entrysubtype}{\undoctype}
-  {\setunit{\addcomma\space}
-   \printfield{number}%
-   \clearfield{number}%
-   \newunit}
-  {}%
   \usebibmacro{publicationinfo}%
   \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
+  \usebibmacro{doi+eprint+url}}%
   \newunit\newblock
   \setunit{\bibpagerefpunct}\newblock
   \usebibmacro{pageref}%
@@ -1992,6 +1991,39 @@
      \usebibmacro{translator+othersstrg}}}%
      \clearname{translator}}
     {}}
+	
+\newbibmacro*{undoc}{%
+	\usebibmacro{author/editor/institution}%
+	\setunit{\addspace}%
+	\printfield[untitle]{title}%
+	\newunit
+	\printfield{titleaddon}%
+	\newunit\newblock
+	\iffieldundef{number}
+	  {\usebibmacro{undoc:year+vol+report}}
+	  {\iffieldundef{year}
+	    {\setunit{\addcomma\space}}
+	    {\printtext{\mkbibparens{\usebibmacro{date}}}%
+	     \newunit}%
+	   \printfield{number}}%
+	\newunit\newblock
+	\usebibmacro{doi+eprint+url}%
+	\newunit\newblock
+	\usebibmacro{legislation:note}}
+
+\newbibmacro*{undoc:year+vol+report}{%
+  \usebibmacro{journaldate}%
+  \newunit
+  \usebibmacro{reportvolume}%
+  \setunit{\addspace}%
+  \printfield[default]{journaltitle}%
+  \setunit*{\addspace}%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \setunit{\addspace}}%
+  \printfield{pages}}
 
 \newbibmacro*{unrep:date}{%
   \ifboolexpr{ test {\iffieldundef{journaltitle}}%
@@ -2915,6 +2947,11 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\DeclareLabeltitle[misc]{%
+  \field{shorttitle}
+  \field{titleaddon}
+  \field{title}}
+
 \DeclareSourcemap{
   \maps[datatype=bibtex]{
   \map[overwrite=false]{
@@ -3201,9 +3238,12 @@
     \step[fieldsource=entrysubtype,
           match={undoc},
           final=true]
-    \step[fieldsource=number]
-    \step[fieldtarget=shorttitle,
-          origfieldval=true]}
+    \step[fieldsource=instrument_no,
+          fieldtarget=titleaddon,
+          origfieldval=true]
+	\step[fieldsource=doc_no,
+	      fieldtarget=number,
+		  origfieldval=true]}
  }
 }
 
