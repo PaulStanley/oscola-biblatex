@@ -180,7 +180,7 @@ To summarise:\index[general]{scope of package}
   the US, Australia, Canada and New Zealand, but not for citing
   legislation or `official' materials.
 \item The \oscola\ style provides basic facilities for citing public
-  international law treaties and case law, but does not cover
+  international law treaties and case law, and at least many UN documents, but does not cover
   everything that the 3rd edition of \oscola\ specifies in relation to
   such materials.
 \end{itemize}
@@ -211,7 +211,7 @@ of the community at
 \TeX-StackExchange\footnote{\url{tex.stackexchange.com}} have helped
 too. I've borrowed from more people than I can remember. Daniel
 H\"ogger identified various important bugs, and suggested
-improvements. Thanks to everyone.
+improvements, particularly in relation to international law materials. Thanks to everyone.
 
 \subsection{An apology}
 
@@ -312,7 +312,7 @@ I would suggest installation in your (local) \TeX\ directory as follows:
 \item[oscola.bbx] With the bibliography style files in \texttt{.../\allowbreak tex/\allowbreak latex/\linebreak biblatex/\allowbreak bbx}.
 \item[oscola.cbx] With the citation style files in \texttt{.../tex/latex/\linebreak biblatex/cbx}.
 \item[english-oscola.lbx] With the language definition files in \texttt{.../tex/latex/\linebreak biblatex/lbx}.
-\item[oscola-documentation.pdf] With documentation in a suitable directory under\linebreak \texttt{.../doc/latex}.
+\item[oscola.pdf] With documentation in a suitable directory under\linebreak \texttt{.../doc/latex}.
 \item[oscola.ist] With the index style files in \verb|.../makeindex/latex|.
 \item[oscola-examples.bib] With the sample bibliography files in a suitable directory under \verb|.../bibtex/bib|.
 \end{description}
@@ -4086,7 +4086,7 @@ Reports are relatively straightforward:
 \begin{itemize}
 \item Some documents entitled `report' are actually books. If they
   have an \textsc{isbn} number they should be treated as books and
-  entered into the database accordingly: see the \emph{Oscola 4} at
+  entered into the database accordingly: see \oscolashort\ at
   39. In that case, even if the author is an institution, it should be
   entered in the \texttt{author} field. It is usually desirable, in
   such a case, to enter the \texttt{author} with an extra set of
@@ -4521,7 +4521,7 @@ year and number.
 
 \index[general]{United Nations documents|(}
 \index[general]{misc entrytype@\texttt{misc} entrytype!UN documents}
-The guidance given on citation of UN documents in the third edition of \oscolashort\ is
+The guidance given on citation of \textsc{un} documents in the third edition of \oscolashort\ is
 somewhat inconsistent.\footcite[See][32-36]{oscola3} The scheme adopted here has been suggested by Daniel H\"ogger.
 
 United Nations documents should be given the \texttt{entrytype} of \texttt{misc}, and with the \texttt{entrysubtype} set to \texttt{undoc}.
@@ -4543,8 +4543,8 @@ by used as an alternative.)
 \index[general]{instrument no field@\texttt{instrument\_no} field!UN documents@in UN documents}
 \index[general]{United Nations documents!instrument no}
 \item[doc\_no] The UN document number. Include the `UN Doc' (since not all documents seem to have it, and \oscola\ therefore
-cannot guess when it should be added. Note also that for some pre-1976 document, the date is part of the official document number
-and should be added here too.(Internally this equates to the \texttt{number} field, which may be used as an alternative.)
+cannot guess when it should be added). Note that for some pre-1976 documents, the date is part of the official document number
+and should be added here too. (Internally this equates to the \texttt{number} field, which may be used as an alternative.)
 \index[general]{doc no field@\texttt{doc\_no} field!UN documents@in UN documents}
 \index[general]{United Nations documents!doc no}
 \item[date] The date of the instrument.
@@ -4933,7 +4933,7 @@ This work has the LPPL maintenance status of `maintained'. The current maintaine
 
 The documentation for this package, consists of the following files:
 \begin{itemize}
-\item \texttt{oscola-documentation.pdf}
+\item \texttt{oscola.pdf}
 \item \texttt{oscola-examples.bib}
 \end{itemize}
 
