@@ -13,7 +13,7 @@
 % This work has the LPPL maintenance status 'maintained'.
 % The current maintainer of this work is Paul Stanley (pstanley@essexcourt.net)
 
-\ProvidesFile{oscola.bbx}[2012/09/27 v1.1A Biblatex bibliography style for OSCOLA standard] 
+\ProvidesFile{oscola.bbx}[2013/05/19 v1.1A Biblatex bibliography style for OSCOLA standard] 
 
 \RequireBibliographyStyle{authortitle}
 
@@ -90,12 +90,12 @@
   \iftoggle{bbx@initsep}
     {\togglefalse{bbx@initsep}}
     {\oldbibnamedelimb}}
-%\renewcommand\bibnamedelimc{%
-%  \togglefalse{bbx@initsep}%
-%  \oldbibnamedelimc}
-%\renewcommand\bibnamedelimd{%
-%  \togglefalse{bbx@initsep}%
-%  \oldbibnamedelimd}
+\renewcommand\bibnamedelimc{%
+  \togglefalse{bbx@initsep}%
+  \oldbibnamedelimc}
+\renewcommand\bibnamedelimd{%
+  \togglefalse{bbx@initsep}%
+  \oldbibnamedelimd}
 \renewcommand\bibnamedelimi{%
   \togglefalse{bbx@initsep}%
   \oldbibnamedelimi}
