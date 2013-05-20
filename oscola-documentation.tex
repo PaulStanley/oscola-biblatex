@@ -1,3 +1,14 @@
+% This file documents the biblatex-oscola package. It is (c) Paul Stanley 2012
+% and licensed under the Creative Commons Attribution 3.0-Unported License (CC BY 3.0). A copy of that
+% license is available at
+%   http://creativecommons.org/licenses/by/3.0/deed.en_GB
+%
+% The documentation makes use of fonts that are commercially available, but may
+% be modified so that it does not do so.
+% To compile: run LaTeX, Biber, LaTeX, LaTeX, splitindex -- -s oscola.ist, makeindex oscola-documentation-general, LaTeX, LaTeX
+%
+%
+
 \documentclass[a5paper,fontsize=9pt,DIV=1]{scrartcl}
 
 \usepackage[pass,a5paper]{geometry}
@@ -180,7 +191,7 @@ To summarise:\index[general]{scope of package}
   the US, Australia, Canada and New Zealand, but not for citing
   legislation or `official' materials.
 \item The \oscola\ style provides basic facilities for citing public
-  international law treaties and case law, but does not cover
+  international law treaties and case law, and at least many UN documents, but does not cover
   everything that the 3rd edition of \oscola\ specifies in relation to
   such materials.
 \end{itemize}
@@ -211,7 +222,7 @@ of the community at
 \TeX-StackExchange\footnote{\url{tex.stackexchange.com}} have helped
 too. I've borrowed from more people than I can remember. Daniel
 H\"ogger identified various important bugs, and suggested
-improvements. Thanks to everyone.
+improvements, particularly in relation to international law materials. Thanks to everyone.
 
 \subsection{An apology}
 
@@ -312,7 +323,7 @@ I would suggest installation in your (local) \TeX\ directory as follows:
 \item[oscola.bbx] With the bibliography style files in \texttt{.../\allowbreak tex/\allowbreak latex/\linebreak biblatex/\allowbreak bbx}.
 \item[oscola.cbx] With the citation style files in \texttt{.../tex/latex/\linebreak biblatex/cbx}.
 \item[english-oscola.lbx] With the language definition files in \texttt{.../tex/latex/\linebreak biblatex/lbx}.
-\item[oscola-documentation.pdf] With documentation in a suitable directory under\linebreak \texttt{.../doc/latex}.
+\item[oscola.pdf] With documentation in a suitable directory under\linebreak \texttt{.../doc/latex}.
 \item[oscola.ist] With the index style files in \verb|.../makeindex/latex|.
 \item[oscola-examples.bib] With the sample bibliography files in a suitable directory under \verb|.../bibtex/bib|.
 \end{description}
@@ -4086,7 +4097,7 @@ Reports are relatively straightforward:
 \begin{itemize}
 \item Some documents entitled `report' are actually books. If they
   have an \textsc{isbn} number they should be treated as books and
-  entered into the database accordingly: see the \emph{Oscola 4} at
+  entered into the database accordingly: see \oscolashort\ at
   39. In that case, even if the author is an institution, it should be
   entered in the \texttt{author} field. It is usually desirable, in
   such a case, to enter the \texttt{author} with an extra set of
@@ -4517,6 +4528,103 @@ year and number.
 \index[general]{reports!comdocs@\textsc{comdoc}s|)}
 \index[general]{reports|)}
 
+\section{UN Documents}
+
+\index[general]{United Nations documents|(}
+\index[general]{misc entrytype@\texttt{misc} entrytype!UN documents}
+The guidance given on citation of \textsc{un} documents in the third edition of \oscolashort\ is
+somewhat inconsistent.\footcite[See][32-36]{oscola3} The scheme adopted here has been suggested by Daniel H\"ogger.
+
+United Nations documents should be given the \texttt{entrytype} of \texttt{misc}, and with the \texttt{entrysubtype} set to \texttt{undoc}.
+
+The following fields are used:
+
+\begin{description}
+\index[general]{author field@\texttt{author} field!UN documents@in UN documents}
+\index[general]{United Nations documents!author}
+\index[general]{institution field@\texttt{institution} field!UN documents@in UN documents}
+\index[general]{United Nations documents!institution}
+\item[author/institution] The body producing the document (eg UNGA for the General Assembly).
+\item[title] The `long' title of an instrument, if it has one.
+\index[general]{title field@\texttt{title} field!UN documents@in UN documents}
+\index[general]{United Nations documents!title}
+\item[instrument\_no] The number \emph{of the instrument} (eg Res 251/210). This is different from the
+number of the \emph{document}. (Internally this equates to the \texttt{titleaddon} field, which may
+by used as an alternative.)
+\index[general]{instrument no field@\texttt{instrument\_no} field!UN documents@in UN documents}
+\index[general]{United Nations documents!instrument no}
+\item[doc\_no] The UN document number. Include the `UN Doc' (since not all documents seem to have it, and \oscola\ therefore
+cannot guess when it should be added). Note that for some pre-1976 documents, the date is part of the official document number
+and should be added here too. (Internally this equates to the \texttt{number} field, which may be used as an alternative.)
+\index[general]{doc no field@\texttt{doc\_no} field!UN documents@in UN documents}
+\index[general]{United Nations documents!doc no}
+\item[date] The date of the instrument.
+\end{description}
+
+You can also use other common fields, such as \texttt{shorttitle}, \texttt{indextitle} and so on. (If you do not
+specify a short title, \oscola\ will use the instrument number as the short title.) If you wish to cite a \textsc{un} document 
+from a journal or collection (such as ILM), you may include \texttt{journaltitle}, \texttt{volume} and \texttt{pages} fields here.
+
+It is not clear, from the examples given in \oscolashort\ (3rd edition) whether the 
+titles of \textsc{un} instruments should be given in quotation marks or not.
+By default, \oscola\ does not use quotation marks. But you may, if you wish, alter this. To do so,
+include the following in your preamble:
+\begin{verbatim}
+\DeclareFieldFormat{untitle}{\mkbibquote{#1}}
+\end{verbatim}
+
+\index[general]{United Nations documents!examples}
+\begin{bibexample}[Indep]
+\begin{verbatim}
+@misc{Indep,
+  author        = {UNGA},
+  title         = {Declaration on the Granting of Independence to Colonial
+                   Countries and Peoples},
+  instrument_no = {Res 1514 (XV)},
+  date          = {1960-12-14},
+  doc_no        = {UN~Doc A/4684 (1961)},
+  shorttitle    = {Res 1514 (XV)},
+  entrysubtype  = {undoc},
+}
+\end{verbatim}
+\end{bibexample}
+
+\begin{bibexample}[res51_210]
+\begin{verbatim}
+@misc{res51_210,
+  institution   = {UNGA},
+  instrument_no = {Res 51/210},
+  date          = {1996-12-17},
+  doc_no        = {UN~Doc A/RES/51/210},
+  entrysubtype  = {undoc},
+}
+\end{verbatim}
+\end{bibexample}
+
+\begin{bibexample}[badinter4]
+\begin{verbatim}
+@misc{badinter4,
+  title        = {Opinion No 4 of the Badinter Commission},
+  indexttitle  = {Badinter Commission, Opinion No 4},
+  year         = {1992},
+  volume       = {31},
+  journaltitle = {I.L.M.},
+  pages        = {1501},
+  entrysubtype = {undoc},
+}
+\end{verbatim}
+\end{bibexample}
+
+\begin{description}
+\item[\egcite{\{Indep\}}] \cite{Indep}
+\item[\egcite{\{res51\_210\}}] \cite{res51_210}
+\item[\egcite{\{badinter4\}}] \cite{badinter4}
+\end{description}
+
+No special index is provided for \textsc{un} documents, but you can use the \texttt{tabulate} field to direct them to an appropriate index if you choose to do so.
+\index[general]{United Nations documents|)}
+
+
 \section{Miscellaneous Other Resources}
 
 There is also support for citation of theses, letters, conference
@@ -4836,7 +4944,7 @@ This work has the LPPL maintenance status of `maintained'. The current maintaine
 
 The documentation for this package, consists of the following files:
 \begin{itemize}
-\item \texttt{oscola-documentation.pdf}
+\item \texttt{oscola.pdf}
 \item \texttt{oscola-examples.bib}
 \end{itemize}
 
@@ -5069,6 +5177,10 @@ References are to examples, which are numbered in the margin.
   \subitem European Convention on Human Rights \ref{echr:treaty}
   \subitem European Union treaties \ref{teu}
   \subitem international treaties \ref{scheldt}, \ref{aaland}, \ref{mongolia}, \ref{echr:treaty}
+  
+\item UN documents
+  \subitem by UN Doc number \ref{Indep}, \ref{res51_210}
+  \subitem in ILM \ref{badinter4}
 
 \item website \ref{cole09}
   

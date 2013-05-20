@@ -2,7 +2,7 @@
 % Part of the OSCOLA package for biblatex: see the file
 % oscola.lbx for copyright and licence information
 
-\ProvidesFile{oscola.cbx}[2012/09/27 v1.1A Biblatex citation style for OSCOLA standard] 
+\ProvidesFile{oscola.cbx}[2013/04/23 v1.1C Biblatex citation style for OSCOLA standard] 
 
 \RequireCitationStyle{verbose-inote}
 
@@ -270,7 +270,7 @@
         {\usebibmacro{cite:oldshort}}}}}
 
 \renewbibmacro*{footcite:note}{%
-  \ifboolexpr{test {\ifentrytype{legislation}} 
+  \ifboolexpr{test {\ifentrytype{legislation}}
               or ( test {\ifentrytype{legal}} 
                    and ( not test {\iffieldequals{entrysubtype}{\treatysubtype}} ))}%
     {\usebibmacro{cite:short}}%
