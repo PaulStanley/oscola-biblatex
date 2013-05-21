@@ -1997,11 +1997,15 @@
 	
 \newbibmacro*{undoc}{%
         \iffieldundef{title}
-          {\usebibmacro{author/editor/institution}}
-          {\printfield[untitle]{title}%
-           \setunit{\addcomma\space}%
-           \usebibmacro{author/editor/institution}}%
-	\setunit{\addspace}%
+          {}
+          {\ifnameundef{author}%
+            {}
+            {\usebibmacro{author/editor+others/translator+others}%
+             \setunit*{\addcomma\space}}%
+           \printfield[untitle]{title}%
+           \setunit{\addcomma\space}}%
+        \printlist{institution}%
+        \newunit
 	\printfield{titleaddon}%
 	\newunit\newblock
 	\iffieldundef{number}
@@ -2015,6 +2019,11 @@
 	\usebibmacro{doi+eprint+url}%
 	\newunit\newblock
 	\usebibmacro{legislation:note}}
+
+\newbibmacro*{undoc:index}{%
+  \clearname{author}%
+  \clearname{editor}%
+  \usebibmacro{undoc}}
 
 \newbibmacro*{undoc:year+vol+report}{%
   \usebibmacro{journaldate}%
@@ -2785,14 +2794,8 @@
 \DeclareBibliographyDriver{inreference:index}{\usebibmacro{default:index}}
 \DeclareBibliographyDriver{misc:index}{%
   \iffieldequals{entrysubtype}{\undoctype}
-    {\printfield{indextitle}%
-     \setunit{\addcomma\space}%
-     \printfield{number}%
-     \newunit
-     \iffieldundef{year}
-       {}
-       {\printtext{\mkbibparens{\printfield{year}}}}}
-   {\usebibmacro{default:index}}}
+    {\usebibmacro{undoc:index}}
+    {\usebibmacro{default:index}}}
 \DeclareBibliographyDriver{booklet:index}{\usebibmacro{default:index}}
 \DeclareBibliographyDriver{techreport:index}{\usebibmacro{default:index}}
 \DeclareBibliographyDriver{manual:index}{\usebibmacro{default:index}}
@@ -3249,28 +3252,25 @@
    \step[fieldsource=doc_no,
 	 fieldtarget=number,
          origfieldval=true]
+   }
+ \map[overwrite]{
+    \pertype{misc}
+    \step[fieldsource=institution,
+          fieldset=scratch,
+          origfieldval=true,
+          append=true]
+    \step[fieldsource=titleaddon,
+          fieldset=scratch,
+          origfieldval=true,
+          append=true]   
+ }
+  \map[overwrite=false]{
+   \pertype{misc}
+   \step[fieldsource=scratch]
    \step[fieldsource=title]
    \step[fieldset=indextitle,
          origfieldval=true]
-   \step[fieldset=indextitle,
-         fieldvalue={oscola-setting-field}]
-   }
-%  \map[overwrite]{
-%   \pertype{misc}
-%   \step[fieldsource=entrysubtype,
-%         match={undoc},
-%          final=true]
-%   \step[fieldsource=indextitle,
-%         match={oscola-setting-field},
-%         final=true]
-%   \step[fieldsource=institution,
-%         fieldtarget=indextitle,
-%         origfield=true]
-%   \step[fieldsource=titleaddon,
-%         fieldtarget=indextitle,
-%         append,
-%         origfield=true]
-%  }
+  }
  }
 }
 
