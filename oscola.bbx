@@ -675,6 +675,9 @@
   \usebibmacro{pageref}%
   \usebibmacro{finentry}}
 
+%\DeclareBibliographyDriver{misc:index}{%
+%  \printfield{indextitle}}%
+
 \DeclareBibliographyDriver{online}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
@@ -1993,10 +1996,12 @@
     {}}
 	
 \newbibmacro*{undoc}{%
-	\usebibmacro{author/editor/institution}%
+        \iffieldundef{title}
+          {\usebibmacro{author/editor/institution}}
+          {\printfield[untitle]{title}%
+           \setunit{\addcomma\space}%
+           \usebibmacro{author/editor/institution}}%
 	\setunit{\addspace}%
-	\printfield[untitle]{title}%
-	\newunit
 	\printfield{titleaddon}%
 	\newunit\newblock
 	\iffieldundef{number}
@@ -2780,7 +2785,7 @@
 \DeclareBibliographyDriver{inreference:index}{\usebibmacro{default:index}}
 \DeclareBibliographyDriver{misc:index}{%
   \iffieldequals{entrysubtype}{\undoctype}
-    {\printfield{title}%
+    {\printfield{indextitle}%
      \setunit{\addcomma\space}%
      \printfield{number}%
      \newunit
@@ -3241,9 +3246,31 @@
     \step[fieldsource=instrument_no,
           fieldtarget=titleaddon,
           origfieldval=true]
-	\step[fieldsource=doc_no,
-	      fieldtarget=number,
-		  origfieldval=true]}
+   \step[fieldsource=doc_no,
+	 fieldtarget=number,
+         origfieldval=true]
+   \step[fieldsource=title]
+   \step[fieldset=indextitle,
+         origfieldval=true]
+   \step[fieldset=indextitle,
+         fieldvalue={oscola-setting-field}]
+   }
+%  \map[overwrite]{
+%   \pertype{misc}
+%   \step[fieldsource=entrysubtype,
+%         match={undoc},
+%          final=true]
+%   \step[fieldsource=indextitle,
+%         match={oscola-setting-field},
+%         final=true]
+%   \step[fieldsource=institution,
+%         fieldtarget=indextitle,
+%         origfield=true]
+%   \step[fieldsource=titleaddon,
+%         fieldtarget=indextitle,
+%         append,
+%         origfield=true]
+%  }
  }
 }
 
