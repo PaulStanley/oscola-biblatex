@@ -9,13 +9,29 @@
 %
 %
 
-\documentclass[a5paper,fontsize=9pt,DIV=1]{scrartcl}
+\documentclass[a4paper,
+               11pt,
+	       DIV=1,			   
+	       footinclude=false]
+	      {scrartcl}
 
-\usepackage[pass,a5paper]{geometry}
+% SET VERSION NUMBER AND RELEASE DATE
+\def\releasedate{26 May 2013}
+\def\versionnumber{1.2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{geometry}
+\geometry{a4paper,
+          left=30mm, 
+          top=27.4mm, 
+          headsep=2\baselineskip, 
+          textwidth=30pc, 
+          marginparsep=1pc, 
+          textheight=49\baselineskip,
+          headheight=\baselineskip}
 
 \usepackage[style=british]{csquotes}
-
-\usepackage{hyperref}
+\usepackage[T1]{fontenc}
 
 \usepackage[style=oscola,
             indexing=cite,
@@ -29,9 +45,10 @@
 
 \usepackage{tabularx}
 
-\usepackage{fontspec}
-\setmainfont[Ligatures = TeX,SmallCapsFont={Equity Caps B}]{Equity Text B}
-\setsansfont[Ligatures = TeX]{Franklin Gothic Medium}
+\usepackage[mono=false]{libertine}
+\usepackage[scaled=0.8]{beramono}
+\usepackage{microtype}
+\usepackage{ragged2e}
 
 \usepackage{enumitem}
 \setlist[description]{%
@@ -44,35 +61,70 @@
 
 \usepackage{booktabs}
 
+\renewcommand{\linespread}{1.2}
+
+% HYPER REF
+
+\usepackage{hyperref}
+
+
 % Various commands and environments specific to this document
 \newcommand{\oscola}{\textsc{bl-oscola}}
 \newcommand{\biblatex}{\textsc{biblatex}}
 \newcommand{\oscolashort}{\textsc{oscola}\nocite{oscola}}
 \newcounter{egcounter}\setcounter{egcounter}{0}
 
-\newenvironment{bibexample}[1][]{%
-  \medskip\par\small\noindent\ignorespaces
-  \marginpar{[\refstepcounter{egcounter}\arabic{egcounter}]\label{#1}}
-  \begin{minipage}[t]{0.95\linewidth}}
- {\end{minipage}\par\medskip}
+
+\usepackage[dvipsnames]{xcolor}
+
+% This code from Juanjo's answer at http://www.latex-community.org
+% /viewtopic.php?f=&t=1437&sid30648b3e881b9dd8c033a7ed1b1f31fd&start=10
+\newlength{\boxwidth}
+\newsavebox{\boxcontainer}
+\newenvironment{bibexample}[1][]
+{%
+  \medskip\par\noindent\ignorespaces
+  \marginpar{[\refstepcounter{egcounter}\arabic{egcounter}]\label{#1}}%
+  \setlength{\boxwidth}{0.95\linewidth}%
+  \addtolength{\boxwidth}{-2\fboxsep}
+  \addtolength{\boxwidth}{-2\fboxrule}
+  \begin{lrbox}{\boxcontainer}
+  \begin{minipage}[t]{\boxwidth}%
+}
+{%
+  \end{minipage}\end{lrbox}%
+  \colorbox{gray!30}{\usebox{\boxcontainer}}
+  \par\medskip}
 
 \newcommand{\egref}[1]{[\ref{#1}]}
 
-\newcommand{\egcite}[1]{\texttt{\textbackslash cite#1}}
+\newcommand{\egcite}[1]{{\texttt{\textbackslash cite#1}}}
 \newcommand\angledtext[1]{$\langle$\textit{#1}\/$\rangle$}
 
 % BIBLIOGRAPHIC RESOURCES
 \addbibresource{oscola-examples.bib}
 
 % HYPHENATION
-\hyphenation{am-end-ed}\hyphenation{nieu-wen-huis}
+\hyphenation{am-end-ed}
+\hyphenation{nieu-wen-huis}
 \hyphenation{sti-cht-ing}
 
 % TYPOGRAPHY
+\usepackage{scrpage2}
 
 \deffootnote{1em}{1em}{\thefootnotemark\ }
+\setcounter{secnumdepth}{-1}
 \frenchspacing
-
+\RaggedRight
+\setlength{\parindent}{3ex}
+\pagestyle{scrheadings}
+\automark{section}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\ifoot{\rightmark}
+\ofoot{\pagemark}
+\cfoot{}
+\chead{}
+\renewcommand{\footfont}{\upshape\scshape}
 % INDEXES
 \makeindex[name=ukcases, intoc=true,
            title={Table of UK Cases}]
@@ -126,9 +178,11 @@
 \begin{document}
 
 \title{The OSCOLA Biblatex Style}
-\subtitle{Version 1.1}
+\subtitle{Version \versionnumber}
 
 \author{Paul Stanley\thanks{pstanley@essexcourt.net}}
+
+\date{\releasedate}
 
 \maketitle
 
@@ -475,7 +529,7 @@ individual sections below.
 Another important aspect of the bibliographic database is the use of
 the \texttt{keyword} field to include information about the particular
 jurisdiction from which the source originates. This is described in
-more detail in section \ref{countries}.
+more detail at page \pageref{countries}.
 
 \subsection{Entry Fields}
 
@@ -669,10 +723,7 @@ The format for \verb|\cite| is:
 \verb|\cite|$\langle$[\emph{prenote}]$\rangle \langle$[\emph{postnote}]$\rangle$\verb|{|\emph{label}\verb|}|
 \end{center}
 The \emph{prenote} is any material you want printed before the
-citation (such as `See').\footnote{There is one time---when dealing
-  with court rules and practice directions---when the \oscola\ style
-  abuses the pre-note for special reasons. See section
-  \ref{courtrules}.}
+citation (such as `See').
 The \emph{postnote} is anything you want
 printed after it -- usually the page or pages to which you are
 referring. So long as it looks like a set of `pages', the package will
@@ -744,7 +795,7 @@ But there are likely to be complications;
 because as it stands this will print \emph{everything} you have cited
 including cases and statutes. You probably don't want this: the
 likelihood is that you will want to put cases and statutes in indexed
-tables, as described in section \ref{indexing}.
+tables, as described at page \pageref{indexing}.
 
 \index[general]{bibliography!printing!type option@\texttt{type} option}
 \index[general]{bibliography!printing!nottype option@\texttt{nottype} option}
@@ -859,7 +910,7 @@ usually, to make use of one of the pre-installed groupings.
 \index[general]{indexing!setting up indexes!DeclareIndexAssociation@\texttt{\textbackslash DeclareIndexAssociation}}
 To do this, use the
 \verb|\DeclareIndexAssociation{|\angledtext{category}\verb|}{|\angledtext{index}\verb|}|
-macro. It\linebreak takes two arguments. The first is the category of entries
+macro. It takes two arguments. The first is the category of entries
 you want included in the index, selected from the list in table
 \ref{categories}. The second is the index you want to receive the data
 in relation to that category of entry. So, for instance:
@@ -1233,7 +1284,7 @@ Mandatory. The date which it is appropriate to
   use in the citation of the report you will be using, which may or
   may not be the actual date of the decision. Only the year is
   required (except for some unreported cases, where \oscolashort\
-  requires a full date). See section \ref{dateformat}
+  requires a full date). See page \pageref{dateformat}
   for information about how to enter dates.
 \item[\texttt{origdate}]
 \index[general]{origdate field@\texttt{origdate} field!cases@in cases}
@@ -1258,7 +1309,7 @@ Optional, but sometimes required for correct
 \index[general]{bibfile@\texttt{.bib} file!keywords field@\texttt{keywords} field}
 Multiple keywords can be given; but the
 keywords field\linebreak should always include at least one `country'
-indication. For detail see section \ref{countries}.
+indication. For detail see page \pageref{countries}.
 \item[\texttt{court}]
 \index[general]{court field@\texttt{court} field}
 \index[general]{bibfile@\texttt{.bib} file!court field@\texttt{court} field}
@@ -1309,7 +1360,7 @@ If the case is reported, you need to give a page
 \index[general]{pagination field@\texttt{pagination} field!cases@in cases}
 \index[general]{bibfile@\texttt{.bib} file!pagination field@\texttt{pagination} field}
 The type of pagination the report uses: see
-  section \ref{pagination} above for details: it defaults to page for
+  page \pageref{pagination} above for details: it defaults to page for
   all cases other than \textsc{eu} and \textsc{echr} cases, where it
   defaults to paragraph.
 \item[\texttt{options}] 
@@ -1320,7 +1371,7 @@ Only required in some cases. The option
   that you may need is \texttt{year-essential=true}
   for cases where it is not obvious that the year is an essential
   part of the citation, but it is. This is explained further in
-  section \ref{yearoptional} below.
+  page \pageref{yearoptional} below.
 \item[\texttt{note}]
 \index[general]{note field@\texttt{note} field!cases@in cases}
 \index[general]{bibfile@\texttt{.bib} file!note field@\texttt{note} field}
@@ -1348,7 +1399,7 @@ Australian cases where the location of the court may matter.
 Additional fields \texttt{parreporter},
 \texttt{parseries}, \texttt{parvolume} and \texttt{parpages} are used
 to give citation details to a second report, where it is necessary to
-cite more than one reporter. See section \ref{parallel:reports} for
+cite more than one reporter. See page \pageref{parallel:reports} for
 further information.
 \item[\texttt{additionalreports}]
 \index[general]{indexing!additional reports}
@@ -2405,7 +2456,7 @@ care of automatically.
 
 \section{Public International Cases}
 
-As explained in section \ref{scope}, \oscola\ does not provide
+As explained at page \pageref{scope}, \oscola\ does not provide
 fully comprehensive provisions for citing all possible forms of
 international cases. However, it does include provision which should
 be adequate for the decisions of the ICJ and for at least a reasonable
@@ -2546,7 +2597,7 @@ legislation (bills), (d) the treaties establishing
 the \textsc{eu}, (e) legislation made by the \textsc{eu}. It does not
 provide facilities for citing non-UK or \textsc{eu}
 legislation. Rules of Court, though technically legislation, are also
-dealt with separately: see \ref{courtrules}.
+dealt with separately: see page \ref{courtrules}.
 
 \subsection{UK Primary Legislation}
 
@@ -2639,7 +2690,7 @@ schedule, and in those cases you will have to format the
 produce a suitable index. If it's just one or two citations, you might
 be lucky. If it's more, you will probably need to use \emph{two}
 citations: one---easy---to print the citation without indexing it, and
-separately a rather elaborate command to make sure the index is correct: see section \ref{trickyindexing} above.
+separately a rather elaborate command to make sure the index is correct: see page \pageref{trickyindexing} above.
 \index[general]{legislation!citation commands|)}
 
 \subsubsection{Examples}
@@ -2865,7 +2916,7 @@ by the Act to which it refers.
 \end{description}
 
 For advice on citing debates in Hansard, and in Parliamentary
-committees, see section \ref{parliamentary}.
+committees, see page \ref{parliamentary}.
 
 \index[general]{legislation!draft!Scottish}
 The package does not provide specific facilities for referring to
@@ -2903,8 +2954,8 @@ virtual index.\index[general]{legislation!explanatory notes!indexing}}
 type of \textsc{eu} legislation. Nevertheless, there are small
 differences, so that it is convenient to deal with treaties and other
 legislation separately. Note that decisions in what might be called
-\enquote{cases} are dealt with a case citations (see section
-\ref{eudecisioncases}).
+\enquote{cases} are dealt with a case citations (see page
+\pageref{eudecisioncases}).
 
 \subsubsection{Treaties}
 \index[general]{EU treaties!generally|see{treaties, European Union}}
@@ -2913,7 +2964,7 @@ legislation separately. Note that decisions in what might be called
 The \textsc{eu} treaty type is intended to be used for the
 foundational treaties of the \textsc{eu}. Treaties to which the
 \textsc{eu} is \emph{party} should be cited as international treaties
-(following the instructions given in section \ref{piltreaties}).
+(following the instructions given in page \pageref{piltreaties}).
 
 Provide the following information\label{eutreaties}:
 \begin{description}
@@ -3004,8 +3055,8 @@ Thus:\footnote{\cite[29]{oscola}, updated to reflect the most recent
 In subsequent citations \oscola\ will, by default, produce `TEU, art
 \emph{x}'. If you prefer the format `Art \emph{x} TEU' (very common in
 specialist writing), use the bibliography option
-\texttt{eutreaty={}alternative} when loading \biblatex. (See section
-\ref{options} above.)
+\texttt{eutreaty={}alternative} when loading \biblatex. (See page
+\pageref{options} above.)
 
 \index[general]{treaties!European Union!indexing}
 \index[general]{indexing!EU treaties}
@@ -3017,8 +3068,8 @@ sub-article.
 \subsubsection{Other EU legislation}
 
 \index[general]{legislation!EU!regulations}\index[general]{legislation!EU!directives}\index[general]{legislation!EU!decisions}
-Use the fields given for \textsc{eu} treaties in section
-\ref{eutreaties} above, with the following changes:
+Use the fields given for \textsc{eu} treaties in page
+\pageref{eutreaties} above, with the following changes:
 
 \begin{description}
   \item[title] 
@@ -3110,7 +3161,7 @@ ordered chronologically and by number.
 
 \index[general]{legislation!draft!EU}
 Draft \textsc{eu} legislation is cited using the \texttt{@report}
-entry type, described in section \ref{drafteu}.
+entry type, described at page \pageref{drafteu}.
 
 \section{Court Rules}
 
@@ -3488,7 +3539,7 @@ the \texttt{@book} type. The most commonly used fields are as follows:
   Use an \texttt{@book} type with \texttt{volume} where
   each volume is a separate publication (for instance, with a
   different date). For multi-volume reference works use the
-  \texttt{@mvreference} type, discussed in section \ref{mvreference} below.\footnote{The requirements of \oscolashort\ regarding volumes are not clear to me. I think that the position is that if the volume is, as it were, an `independent' publication, the volume is printed with the publication information -- but for multivolume reference works, it is treated separately. That, at any rate, is the approach I have taken: if you specify a volume for a book or collection, it will be printed as part of the volume information; if you specify it for a multi-volume reference, it gets printed afterwards.}
+  \texttt{@mvreference} type, discussed at page \pageref{mvreference} below.\footnote{The requirements of \oscolashort\ regarding volumes are not clear to me. I think that the position is that if the volume is, as it were, an `independent' publication, the volume is printed with the publication information -- but for multivolume reference works, it is treated separately. That, at any rate, is the approach I have taken: if you specify a volume for a book or collection, it will be printed as part of the volume information; if you specify it for a multi-volume reference, it gets printed afterwards.}
 \item[pubstate] Use this field if you need to give information about
   the publication state of the book, such as `forthcoming'.
 \item[note]
@@ -3921,8 +3972,8 @@ in newspapers and case notes. All should be given the entrytype
 \item[entrysubtype] 
 \index[general]{entrysubtype field@\texttt{entrysubtype} field!articles@in articles}
 \index[general]{bibfile@\texttt{.bib} file!entrysubtype field@\texttt{entrysubtype} field}
-Normally unnecessary, but might be set to \verb|newspaper| or \verb|casenote|: see sections \ref{newspaper:article} and \ref{casenotes} below.
-\item[author] The author(s) of the article, as a list of names (see section \ref{namelists} for guidance).
+Normally unnecessary, but might be set to \verb|newspaper| or \verb|casenote|: see pages~\pageref{newspaper:article} and \pageref{casenotes} below.
+\item[author] The author(s) of the article, as a list of names (see page \pageref{namelists} for guidance).
 \index[general]{author field@\texttt{author} field!articles@in articles}
 \index[general]{bibfile@\texttt{.bib} file!author field@\texttt{author} field}
 \item[title] The title of the article.
@@ -4544,7 +4595,7 @@ The following fields are used:
 \index[general]{United Nations documents!author}
 \index[general]{institution field@\texttt{institution} field!UN documents@in UN documents}
 \index[general]{United Nations documents!institution}
-\item[author/institution] The body producing the document (eg UNGA for the General Assembly).
+\item[institution] The body producing the document (eg UNGA for the General Assembly). Use the \texttt{author} field only if you want to identify an individual author.
 \item[title] The `long' title of an instrument, if it has one.
 \index[general]{title field@\texttt{title} field!UN documents@in UN documents}
 \index[general]{United Nations documents!title}
@@ -4577,9 +4628,9 @@ include the following in your preamble:
 \begin{bibexample}[Indep]
 \begin{verbatim}
 @misc{Indep,
-  author        = {UNGA},
-  title         = {Declaration on the Granting of Independence to Colonial
-                   Countries and Peoples},
+  institution   = {UNGA},
+  title         = {Declaration on the Granting of Independence 
+                   to Colonial Countries and Peoples},
   instrument_no = {Res 1514 (XV)},
   date          = {1960-12-14},
   doc_no        = {UN~Doc A/4684 (1961)},
@@ -4604,7 +4655,8 @@ include the following in your preamble:
 \begin{bibexample}[badinter4]
 \begin{verbatim}
 @misc{badinter4,
-  title        = {Opinion No 4 of the Badinter Commission},
+  author       = {{Badinter Commission}},
+  title        = {Opinion No 4},
   indexttitle  = {Badinter Commission, Opinion No 4},
   year         = {1992},
   volume       = {31},
@@ -5190,7 +5242,7 @@ References are to examples, which are numbered in the margin.
 
 
 
-\clearpage
+\clearpage\markright{Tables}\pagestyle{scrheadings}
 
 \printindex[ukleg]
 
@@ -5226,6 +5278,7 @@ References are to examples, which are numbered in the margin.
 
 \clearpage
 
+\pagestyle{scrheadings}
 \printindex[general]
 
 \end{document}
