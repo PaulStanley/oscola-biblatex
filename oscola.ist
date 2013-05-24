@@ -1,5 +1,6 @@
 % Part of the OSCOLA package for biblatex: see the file
 % oscola.lbx for copyright and licence information
+% v 1.2 23/05/2013
 
 delim_0 "\\space\\dotfill\\space "
 delim_1 "\\space\\dotfill\\space "

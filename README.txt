@@ -63,8 +63,6 @@ VERSION HISTORY
 
 August 2012     Version 1	Original release
 
-November 2012   Version 1.1A	Various bugfixes and corrections to
-	  	 	 	the documentation
-
-May 2013      Version 1.1C    Various bugfixes, and implementation
-                                of citation scheme for UN documents
+May 2013        Version 1.2    Various bugfixes, and implementation
+                               of citation scheme for UN documents
+								
