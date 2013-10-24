@@ -2398,6 +2398,10 @@
 \let\bbx@sccases\bbx@trash
 \let\bbx@nicases\bbx@trash
 \let\bbx@echrcases\bbx@trash
+\let\bbx@aucases\bbx@trash
+\let\bbx@uscases\bbx@trash
+\let\bbx@nzcases\bbx@trash
+\let\bbx@cacases\bbx@trash
 \let\bbx@echrcommcases\bbx@trash
 \let\bbx@eucases\bbx@trash
 \let\bbx@eucasesnum\bbx@trash
@@ -2441,6 +2445,10 @@
 \renewcommand\bbx@echrcases{cases}
 \renewcommand\bbx@echrcommcases{cases}
 \renewcommand\bbx@eucases{cases}
+\renewcommand\bbx@cacases{cases}
+\renewcommand\bbx@uscases{cases}
+\renewcommand\bbx@aucases{cases}
+\renewcommand\bbx@nzcases{cases}
 \renewcommand\bbx@eucasesnum{trash}
 \renewcommand\bbx@eucaseschron{trash}
 \renewcommand\bbx@eucommcases{cases}
@@ -2543,8 +2551,12 @@
        {\ifkeyword{eu}{\renewcommand{\bbx@relevantindex}{[\bbx@eucases]}}%
        {\ifkeyword{echr}{\renewcommand{\bbx@relevantindex}{[\bbx@echrcases]}}%
        {\ifkeyword{int}{\renewcommand{\bbx@relevantindex}{[\bbx@pilcases]}}%
+	   {\ifkeyword{us}{\renewcommand{\bbx@relevantindex}{[\bbx@uscases]}}% ADDED
+	   {\ifkeyword{ca}{\renewcommand{\bbx@relevantindex}{[\bbx@cacases]}}% ADDED
+	   {\ifkeyword{au}{\renewcommand{\bbx@relevantindex}{[\bbx@aucases]}}% ADDED
+	   {\ifkeyword{nz}{\renewcommand{\bbx@relevantindex}{[\bbx@nzcases]}}% ADDED
        {\iffieldundef{keywords}{\renewcommand{\bbx@relevantindex}{[\bbx@encases]}}
-       {\renewcommand{\bbx@relevantindex}{[\bbx@othercases]}}}}}}}}}}%
+       {\renewcommand{\bbx@relevantindex}{[\bbx@othercases]}}}}}}}}}}}}}}%
        {}%
    \ifboolexpr{ test {\ifentrytype{legal}}%
                 and test {\iffieldequals{entrysubtype}{\treatysubtype}} }%

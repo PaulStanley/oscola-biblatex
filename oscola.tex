@@ -16,8 +16,8 @@
 	      {scrartcl}
 
 % SET VERSION NUMBER AND RELEASE DATE
-\def\releasedate{26 May 2013}
-\def\versionnumber{1.2}
+\def\releasedate{24 October 2013}
+\def\versionnumber{1.3}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{geometry}
@@ -156,6 +156,10 @@
 \DeclareIndexAssociation{echrcases}{intcases}
 \DeclareIndexAssociation{echrcasescomm}{intcases}
 \DeclareIndexAssociation{pilcases}{intcases}
+\DeclareIndexAssociation{nzcases}{ocases}
+\DeclareIndexAssociation{uscases}{ocases}
+\DeclareIndexAssociation{aucases}{ocases}
+\DeclareIndexAssociation{cacases}{ocases}
 \DeclareIndexAssociation{othercases}{ocases}
 \DeclareIndexAssociation{gbprimleg}{ukleg}
 \DeclareIndexAssociation{gbsecleg}{ukleg}
@@ -943,6 +947,10 @@ EU cases                             & \texttt{eucases}      & alphabetical \\
 ECHR cases                           & \texttt{echrcase}     & alphabetical \\
 ECHR Commission decisions            & \texttt{echrcasescomm}& alphabetical \\
 International cases                  & \texttt{pilcases}     & alphabetical \\
+Australian cases					 & \texttt{aucases}      & alphabetical \\
+New Zealand cases                    & \texttt{nzcass}       & alphabetical \\
+US cases                             & \texttt{uscases}      & alphabetical \\
+Canadian cases                       & \texttt{cases}        & alpabetical \\
 Other cases                          & \texttt{othercases}   & alphabetical \\
 UK primary legislation               & \texttt{gbprimleg}    & alphabetical \\
 UK draft legislation                 & \texttt{gbdraftleg}   & alphabetical \\
@@ -2371,7 +2379,8 @@ citation.\footnote{These examples are drawn from \cite[37]{melbourne}.}
 \section{New Zealand Cases}
 
 \index[general]{cases!New Zealand}
-Follow the same format as is used for English cases.
+Follow the same format as is used for English cases, but seeing the
+\verb|keyword| as \verb|nz|.
 
 \section{US Cases}
 
@@ -5082,6 +5091,10 @@ ECHR and international cases are both sent to a single index, \texttt{intcases}
 And finally, all other cases (for instance US, Canadian, Australian) are sent to a fourth index.
 
 \begin{verbatim}
+\DeclareIndexAssociation{nzcases}{ocases}
+\DeclareIndexAssociation{uscases}{ocases}
+\DeclareIndexAssociation{aucases}{ocases}
+\DeclareIndexAssociation{cacases}{ocases}
 \DeclareIndexAssociation{othercases}{ocases}
 \end{verbatim}
 
