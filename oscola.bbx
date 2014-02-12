@@ -109,7 +109,7 @@
                             doi=false,
                             eprint=false,
                             usetranslator=true,
-                            sorting=nity}
+                            sorting=niyt}
 
 \urlstyle{rm}% We don't want monospaced urls
 
@@ -442,6 +442,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareBibliographyDriver{article}{%
+  \bbx@resetpostnotedelim%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
@@ -1312,7 +1313,7 @@
   \printfield[parlt:num]{number}}
 
 \renewbibmacro*{in:}{%
-{\printtext{\space\bibstring{in}\addspace}}}
+{\printtext{\space\midsentence\bibstring{in}\addspace}}}
 
 \newbibmacro{institution+date}{%
   \iflistundef{institution}
@@ -2870,7 +2871,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\DeclareSortingScheme{nity}{
+\DeclareSortingScheme{niyt}{
   \sort{
     \field{presort}
   }
@@ -2889,12 +2890,12 @@
     \field{maintitle}
   }
   \sort{
-    \field{sorttitle}
-    \field{title}
-  }
-  \sort{
     \field{sortyear}
     \field{year}
+  }
+  \sort{
+    \field{sorttitle}
+    \field{title}
   }
   \sort{
     \field[padside=left,padwidth=4,padchar=0]{volume}
