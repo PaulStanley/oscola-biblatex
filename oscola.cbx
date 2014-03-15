@@ -388,15 +388,15 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
-\DeclareCiteCommand{\textcite}[\cbx@textcite\footciteref]
-  {\gdef\cbx@savedkeys{}}
-  {\ifboolexpr{ test {\ifentrytype{jurisdiction}} or test{\ifentrytype{legislation}} }
-     {\usebibmacro{title:or:shorttitle}}%
-     {\printnames{labelname}}%
-   \xappto\cbx@savedkeys{\thefield{entrykey},}}
-  {\multinamedelim}
-  {\protected@xappto\cbx@savedcites{%
-     [\thefield{prenote}][\thefield{postnote}]{\cbx@savedkeys}}}
+%\DeclareCiteCommand{\textcite}[\cbx@textcite\footciteref]
+%  {\gdef\cbx@savedkeys{}}
+%  {\ifboolexpr{ test {\ifentrytype{jurisdiction}} or test{\ifentrytype{legislation}} }
+%     {\usebibmacro{title:or:shorttitle}}%
+%     {\printnames{labelname}}%
+%   \xappto\cbx@savedkeys{\thefield{entrykey},}}
+%  {\multinamedelim}
+%  {\protected@xappto\cbx@savedcites{%
+%     [\thefield{prenote}][\thefield{postnote}]{\cbx@savedkeys}}}
 
 \newbibmacro{title:or:shorttitle}{%
   \ifciteseen
@@ -409,6 +409,15 @@
      {\printfield{shorttitle}}}%
    {\printfield{shorthand}}}%
   {\printfield{title}}}
+
+\renewbibmacro{textcite}{%
+  \ifentrytype{jurisdiction}
+    {\usebibmacro{title:or:shorttitle}}
+    {\ifentrytype{legislation}
+      {\usebibmacro{title:or:shorttitle}}}
+      {\ifnameundef{labelname}
+        {\printfield[citetitle]{labeltitle}}
+        {\printnames{labelname}}}}
 
 
 \endinput
