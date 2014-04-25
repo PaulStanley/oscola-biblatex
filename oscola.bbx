@@ -2050,10 +2050,11 @@
 \renewbibmacro*{url+urldate}{%
   \iffieldundef{url}
   {}
-  {\printfield{url}
+  {\printfield{url}%
   \iffieldundef{urlyear}
-    {}
+    {}%
     {\setunit*{\addspace}%
+     \bbx@resetpostnotedelim%
      \printtext{\printurldate}}}}
 
 \newbibmacro{usjuriscitation}{%
