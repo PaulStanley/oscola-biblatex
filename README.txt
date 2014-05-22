@@ -61,10 +61,14 @@ oscola-examples.bib: With the sample bibliography files in a suitable
 VERSION HISTORY
 ===============
 
-August 2012     Version 1	Original release
+August 2012     Version 1      Original release
 
 May 2013        Version 1.2    Various bugfixes, and implementation
                                of citation scheme for UN documents
 							   
-October 2013	Version 1.3	   Corrected spacing bug
+October 2013    Version 1.3    Corrected spacing bug
+
+May 2014        Version 1.4    Various bugs have been fixed, an additional
+                               index has been installed, and there have
+                               been minor improvements to the documentation
 								
