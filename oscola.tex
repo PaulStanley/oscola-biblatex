@@ -3,9 +3,13 @@
 % license is available at
 %   http://creativecommons.org/licenses/by/3.0/deed.en_GB
 %
-% The documentation makes use of fonts that are commercially available, but may
-% be modified so that it does not do so.
-% To compile: run LaTeX, Biber, LaTeX, LaTeX, splitindex -- -s oscola.ist, makeindex oscola-documentation-general, LaTeX, LaTeX
+% To compile: run 
+% LaTeX <oscola>
+% Biber <oscola>
+% LaTeX <oscola> , LaTeX <oscola>
+% splitindex <oscola> -- -s oscola.ist
+% makeindex oscola-documentation-general
+% LaTeX <oscola>, LaTeX <oscola>
 %
 %
 
@@ -1074,7 +1078,10 @@ two ways of doing this:
 \item If you are using \textsc{splitindex}, run it with the option
   \verb|-m|, and then process each of the resulting sub-indices that
   you want formatted with leaders with the option \verb|-s oscola|.
-\item Alternatively, run \textsc{splitindex} with the option \verb|-- -s oscola|, which will run \textsc{makeindex} on each file with the requisite style.
+\item Alternatively, run \textsc{splitindex} with the option \verb|-- -s oscola|, which will run \textsc{makeindex} on each file with the requisite style. In that case your \verb|.tex| source base name comes first, so that the overall command is
+\begin{verbatim}
+splitindex [BASENAME] -- -s oscola
+\end{verbatim}
 \end{itemize}
 
 The only real annoyance is when you have multiple indexes and want

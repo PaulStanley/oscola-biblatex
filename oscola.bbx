@@ -29,11 +29,22 @@
   \ifstrequal{#1}{uc}
     {\global\toggletrue{bbx@capibid}}
     {\togglefalse{bbx@capibid}}}
-    
+
+\newcommand{\bbx@juriscitationindexlist}{}
+\listadd{\bbx@juriscitationindexlist}{{eu}{eujuriscitation:index}}
+\listadd{\bbx@juriscitationindexlist}{{echr}{echrjuriscitation}}
+\listadd{\bbx@juriscitationindexlist}{{int}{intjuriscitation}}
+\listadd{\bbx@juriscitationindexlist}{{ca}{canjuriscitation}}
+\listadd{\bbx@juriscitationindexlist}{{us}{usjuriscitation}}
+\newcommand{\bbx@defaultjuriscitationindex}{enjuriscitation}
+
 \newtoggle{bbx@shortindex}
 
 \DeclareBibliographyOption{shortindex}[true]{%
-  \settoggle{bbx@shortindex}{#1}}
+  \toggletrue{bbx@shortindex}%
+  \renewcommand{\bbx@juriscitationindexlist}{}%
+  \listadd{\bbx@juriscitationindexlist}{{eu}{eujuriscitation:index:short}}%
+  \renewcommand{\bbx@defaultjuriscitationindex}{juriscitation:index:short}}
 
 % We ensure that there will always be a trash index
 \AtEndPreamble{%
@@ -1219,6 +1230,19 @@
   \usebibmacro{court-note}%
 }
 
+\newbibmacro{eujuriscitation:index:short}{%
+  \iftoggle{bbx@numcite}
+   {\iffieldundef{userb}{}{\printfield{userb}\newunit}
+    \printfield{number}}
+   {\usebibmacro{title}%
+     \newunit
+     \iffieldundef{userb}
+       {}
+       {\printtext{\mkbibparens{\printfield{userb}}\newunit}}%
+     \printtext{\mkbibparens{\usebibmacro{euparenthetical}}}}%
+   \newunit%
+   \usebibmacro{court-note}}
+
 \newbibmacro{eujuriscitation:index}{%
   \iftoggle{bbx@numcite}
    {\iffieldundef{userb}{}{\printfield{userb}\newunit}
@@ -1449,19 +1473,34 @@
         {\printfield[casenotetitle]{title}}}}
     {\usebibmacro{title}}}
 
-\newbibmacro{juriscitation}{%
-  \ifkeyword{eu}%
-    {\usebibmacro{eujuriscitation}}% EU Case
-    {\ifkeyword{echr}%
-      {\usebibmacro{echrjuriscitation}}% ECHR Case
-      {\ifkeyword{int}%
-        {\usebibmacro{intjuriscitation}}% PIL Case
-        {\ifkeyword{ca}%
-          {\usebibmacro{canjuriscitation}}% Canadian Case
-          {\ifkeyword{us}
-           {\usebibmacro{usjuriscitation}}% US Case
-           {\usebibmacro{enjuriscitation}}}}}}}% Default 
+\newcommand{\csusebibmacro}[1]{%
+  \edef\bbx@tempcsname{%
+    \noexpand\usebibmacro{#1}}%
+  \bbx@tempcsname}
 
+\newtoggle{bbx@juriscitedone}
+
+\newcommand{\bbx@juriscitationlist}{}
+\listadd{\bbx@juriscitationlist}{{eu}{eujuriscitation}}
+\listadd{\bbx@juriscitationlist}{{echr}{echrjuriscitation}}
+\listadd{\bbx@juriscitationlist}{{int}{intjuriscitation}}
+\listadd{\bbx@juriscitationlist}{{ca}{canjuriscitation}}
+\listadd{\bbx@juriscitationlist}{{us}{usjuriscitation}}
+
+\global\edef\bbx@defaultjuriscitation{enjuriscitation}
+
+\newbibmacro{juriscitation}{%
+  \togglefalse{bbx@juriscitedone}%
+  \renewcommand{\do}[1]{%
+   \edef\@tempa{\noexpand\ifkeyword{\expandafter\@firstoftwo ##1}}%
+   \edef\@tempb{\expandafter\@secondoftwo ##1}%
+   \@tempa
+      {\toggletrue{bbx@juriscitedone}\csusebibmacro{\@tempb}}
+      {}}%
+ \dolistloop{\bbx@juriscitationlist}%
+ \iftoggle{bbx@juriscitedone}
+   {}
+   {\csusebibmacro{\bbx@defaultjuriscitation}}}
 
 \newbibmacro{juriscitation:index}{%
   \savefield{indextitle}{\bbx@tempa}%
@@ -1481,6 +1520,26 @@
         {\ifkeyword{us}
           {\usebibmacro{usjuriscitation}}
           {\usebibmacro{enjuriscitation}}}}}}}
+
+\renewbibmacro{juriscitation:index}{%
+   \togglefalse{bbx@juriscitedone}%
+   \renewcommand{\do}[1]{%
+     \edef\@tempa{\noexpand\ifkeyword{\expandafter\@firstoftwo ##1}}%
+     \edef\@tempb{\expandafter\@secondoftwo ##1}%
+     \@tempa
+     {\toggletrue{bbx@juriscitedone}\csusebibmacro{\@tempb}}
+     {}}%
+   \dolistloop{\bbx@juriscitationindexlist}%
+   \iftoggle{bbx@juriscitedone}
+     {}
+     {\csusebibmacro{\bbx@defaultjuriscitationindex}}}
+
+\newbibmacro{juriscitation:index:short}{%
+  \printfield{title}%
+  \setunit*{\addspace}%
+  \iffieldundef{year}
+    {}
+    {\printtext{\mkbibparens{\printfield{year}}}}}
 
 \newbibmacro*{jurisdictionpages}{%
   \iffieldequals{entrysubtype}{\subtypenewsp}%
