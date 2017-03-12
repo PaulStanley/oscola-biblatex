@@ -70,15 +70,15 @@
          {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
 	 {\mkbibnameprefix{#3}\isdot}%
        \ifpunctmark{'}{}{\bibnamedelimc}}%
-     \mkbibnamelast{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibnameaffix{#4}\isdot}%
-     \ifblank{#2}{}{\bibnamedelimd\mkbibnamefirst{#2}\isdot}}
+     \mkbibnamefamily{#1}\isdot
+     \ifblank{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}%
+     \ifblank{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}\isdot}}
     {\usebibmacro{name:delim}{#1}%
      \usebibmacro{name:hook}{#1}%
-     \mkbibnamelast{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibnameaffix{#4}\isdot}%
+     \mkbibnamefamily{#1}\isdot
+     \ifblank{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}%
      \ifblank{#2#3}{}{}%
-     \ifblank{#2}{}{\bibnamedelimd\mkbibnamefirst{#2}\isdot}%
+     \ifblank{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}\isdot}%
      \ifblank{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}}}
 
 \DeclareNameAlias{sortname}{last-first}
