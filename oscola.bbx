@@ -1,5 +1,5 @@
 % Legal Style Citations using OSCOLA
-% Copyright Paul Stanley 2014
+% Copyright Paul Stanley 2014-2017
 % This work consists of oscola.bbx, english-oscola.lbx, british-oscola.lbx, oscola.cbx 
 % and oscola.ist.
 % This work may be distributed and/or modified under the
@@ -13,13 +13,13 @@
 % This work has the LPPL maintenance status 'maintained'.
 % The current maintainer of this work is Paul Stanley (pstanley@essexcourt.net)
 
-\ProvidesFile{oscola.bbx}[2014/05/22 v1.4 Biblatex bibliography style for OSCOLA standard]
+\ProvidesFile{oscola.bbx}[2017/03/15 v1.5 Biblatex bibliography style for OSCOLA standard]
 
 \RequireBibliographyStyle{authortitle}
 
 \RequireBiber[3]
 
-\DeclareBibliographyOption{caseshorthands}[false]{
+\DeclareBibliographyOption{caseshorthands}[false]{%
   \ifstrequal{#1}{italic}
     {\DeclareFieldFormat[jurisdiction]{shorthand}{\textit{##1}}}
     {}}
