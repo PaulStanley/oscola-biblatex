@@ -57,11 +57,11 @@
 
 % The bibliography and citation styles use different forms of name
 \AtBeginBibliography{%
-  \toggletrue{blx@firstinits}%
-  \DeclareNameAlias{default}{last-first}%
-  \DeclareNameAlias{editor}{last-first}}
+  \toggletrue{abx@bool@giveninits}%
+  \DeclareNameAlias{default}{family-given}%
+  \DeclareNameAlias{editor}{given-family}}
 
-\renewbibmacro*{name:last-first}[4]{%
+\renewbibmacro*{name:family-given}[4]{%
   \ifuseprefix
     {\usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
@@ -81,7 +81,7 @@
      \ifblank{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}\isdot}%
      \ifblank{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}}}
 
-\DeclareNameAlias{sortname}{last-first}
+\DeclareNameAlias{sortname}{family-given}
 
 % This deals with initials: we need to format them without dots 
 % and close together: HLA not H.L.A. or H. L. A. or H L A
@@ -1478,7 +1478,6 @@
   \bbx@tempcsname}
 
 \newtoggle{bbx@juriscitedone}
-\newtoggle{blx@firstinits}
 
 \newcommand{\bbx@juriscitationlist}{}
 \listadd{\bbx@juriscitationlist}{{eu}{eujuriscitation}}
