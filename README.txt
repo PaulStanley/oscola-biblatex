@@ -9,10 +9,10 @@ further information about coverage see the documentation.
 FILES AND LICENCE
 =================
 
-The package consists of three principal files (oscola.bbx, oscola.cbx
-and english-oscola.lbx) which should be placed, documentation
+The package consists of four principal files (oscola.bbx, oscola.cbx,
+english-oscola.lbx, and british-oscola.lbx), documentation
 (oscola.pdf), and a very short index style file
-(oscola.ist). Those files are copyright (c) Paul Stanley 2012-13.
+(oscola.ist). Those files are copyright (c) Paul Stanley 2012-17.
 
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License, either version 1.3
@@ -37,7 +37,7 @@ from the author, or from https://github.com/PaulStanley/oscola-biblatex.
 It is also licensed under CC BY 3.0.
 
 All bug reports, questions, or suggestions should be sent to the
-maintainer, whose email is pstanley@essexcourt.net.
+maintainer, whose email is pstanley@essexcourt.com.
 
 INSTALLATION
 ============
@@ -50,6 +50,8 @@ oscola.bbx: With the bibliography style files in
 oscola.cbx: With the citation style files in
             .../tex/latex/biblatex/cbx
 english-oscola.lbx: With the language definition files in
+            .../tex/latex/biblatex/lbx
+british-oscola.lbx: With the language definition files in
             .../tex/latex/biblatex/lbx
 oscola.pdf: With documentation in a suitable directory 
             under .../doc/latex
@@ -71,4 +73,3 @@ October 2013    Version 1.3    Corrected spacing bug
 May 2014        Version 1.4    Various bugs have been fixed, an additional
                                index has been installed, and there have
                                been minor improvements to the documentation
-								
