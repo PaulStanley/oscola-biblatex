@@ -307,7 +307,8 @@
   {\printtext[bibhyperlink]{\iftoggle{bbx@capibid}{}{\midsentence}\bibstring{ibidem}}%
   \ifloccit
     {\global\toggletrue{cbx:loccit}}
-    {}}
+    {}%
+    \bbx@unsetpostnotedelim}%
   {\usebibmacro{cite:refonlyfull}}}
 
 \DeclareCiteCommand{\footciteref}[\mkbibfootnote]
