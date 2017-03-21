@@ -1,4 +1,4 @@
-% This file documents the biblatex-oscola package. It is (c) Paul Stanley 2014
+% This file documents the biblatex-oscola package. It is (c) Paul Stanley 2014-2017
 % and licensed under the Creative Commons Attribution 3.0-Unported License (CC BY 3.0). A copy of that
 % license is available at
 %   http://creativecommons.org/licenses/by/3.0/deed.en_GB
@@ -8,7 +8,7 @@
 % Biber <oscola>
 % LaTeX <oscola> , LaTeX <oscola>
 % splitindex <oscola> -- -s oscola.ist
-% makeindex oscola-documentation-general
+% makeindex oscola-general
 % LaTeX <oscola>, LaTeX <oscola>
 %
 %
@@ -20,8 +20,8 @@
 	      {scrartcl}
 
 % SET VERSION NUMBER AND RELEASE DATE
-\def\releasedate{22 May 2014}
-\def\versionnumber{1.4}
+\def\releasedate{23 March 2017}
+\def\versionnumber{1.5}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{geometry}
@@ -40,6 +40,7 @@
 \usepackage[style=oscola,
             indexing=cite,
             backend=biber,
+            ecli=yes,
             babel=hyphen]{biblatex}
 
 \usepackage[splitindex,
@@ -69,7 +70,7 @@
 
 % HYPER REF
 
-\usepackage{hyperref}
+\usepackage[final=true,colorlinks=true]{hyperref}
 
 
 % Various commands and environments specific to this document
@@ -196,6 +197,8 @@
 
 \tableofcontents
 
+\clearpage
+
 \section{Scope}
 
 \index[general]{scope of package|(}The \oscola\ style for \biblatex\
@@ -253,13 +256,13 @@ To summarise:\index[general]{scope of package}
   the US, Australia, Canada and New Zealand, but not for citing
   legislation or `official' materials.
 \item The \oscola\ style provides basic facilities for citing public
-  international law treaties and case law, and at least many UN documents, but does not cover
-  everything that the 3rd edition of \oscola\ specifies in relation to
-  such materials.
+  international law treaties and case law, and at least many UN
+  documents, but does not cover everything that the 3rd edition of
+  \oscola\ specifies in relation to such materials.
 \end{itemize}
-I hope that the coverage is sufficient for most UK legal work; I believe
-that only specialists in public international law or legal history are
-likely to find it significantly deficient.
+I hope that the coverage is sufficient for most UK legal work; I
+believe that only specialists in public international law or legal
+history are likely to find it significantly deficient.
 
 \subsection{Language}
 
@@ -282,9 +285,11 @@ together with the current \biblatex\ maintainers Audrey Boruvka and
 Joseph Wright -- without whom this would be impossible. Many members
 of the community at
 \TeX-StackExchange\footnote{\url{tex.stackexchange.com}} have helped
-too. I've borrowed from more people than I can remember. Daniel
-H\"ogger identified various important bugs, and suggested
-improvements, particularly in relation to international law materials. Thanks to everyone.
+too, at first by answering my questions, and later by asking (and and
+sometimes answering) their own. I've borrowed from more people than I
+can remember. Daniel H\"ogger identified various important bugs, and
+suggested improvements, particularly in relation to international law
+materials.  Thanks to everyone.
 
 \subsection{An apology}
 
@@ -382,12 +387,9 @@ automatic tables of cases and legislation, you will also need:
 \index[general]{english-oscola.ist@\texttt{english-oscola.ist}}
 I would suggest installation in your (local) \TeX\ directory as follows:
 \begin{description}
-\item[oscola.bbx] With the bibliography style files in \texttt{.../\allowbreak tex/\allowbreak latex/\linebreak biblatex/\allowbreak bbx}.
-\item[oscola.cbx] With the citation style files in \texttt{.../tex/latex/\linebreak biblatex/cbx}.
-\item[english-oscola.lbx] With the language definition files in \texttt{.../tex/latex/\linebreak biblatex/lbx}.
-\item[oscola.pdf] With documentation in a suitable directory under\linebreak \texttt{.../doc/latex}.
-\item[oscola.ist] With the index style files in \verb|.../makeindex/latex|.
-\item[oscola-examples.bib] With the sample bibliography files in a suitable directory under \verb|.../bibtex/bib|.
+\item The operational files (that is \verb|oscola.bbx|, \verb|oscola.cbx|, \verb|english-oscola.lbx| and \verb|british-oscola.lbx| go with \LaTeX\ macros under \verb|.../tex/latex/oscola|.
+\item The index style file \verb|oscola.idx| goes with other such files under \verb|.../makeindex/oscola|.
+\item The documentation files (\verb|oscola.tex| and \verb|oscola.pdf| go under \verb|.../doc/latex/oscola|.
 \end{description}
 
 \section{Basic Use}
@@ -464,6 +466,16 @@ of `ibid' in successive citations.
   To my eye that looks odd. The option \texttt{caseshorthands=italic}
   will see to it that shorthand names for cases, like their short
   titles, will be printed in italic type.
+\item[ecli]\index[general]{ECLI numbers}
+  \index[general]{options!ecli@\texttt{ecli}} This option controls
+  whether the EU's recently introduced ECLI numbers get
+  printed. Options are: \verb|yes| (the default), which means they are
+  printed when available in addition to the official report,
+  \verb|no|, in which case they are never printed, or \verb|only|, in
+  which case only ECLI numbers are used, with no printed report, in
+  the current style of the CJEU itself (not yet officially accepted by
+  the standard). Note that if the case is otherwise unreported, ECLI
+  numbers will always be used if available.
 \item[ibidstyle]\index[general]{customization!ibid}
                 \index[general]{ibid!capitalization}
                 \index[general]{options!ibidstyle@\texttt{ibidstyle}}
@@ -850,6 +862,7 @@ any other kind of work, \oscola\ tries to write a suitable piece of
 information in an external file which will, with the help of another
 \index[general]{Imakeidx!recommended}
 \index[general]{Splitindex!recommended}
+\index[general]{memoir!incompatibility}
 package (\textsc{imakeidx} is the one I recommend) and an external
 program or programs (I recommend \textsc{splitindex})\footnote{Why
 \textsc{imakeidx} and \textsc{splitindex}? I like \textsc{splitindex}
@@ -857,7 +870,9 @@ because otherwise you are likely to be bitten by the fact that \LaTeX\
 can only write a number of auxiliary files. I like \textsc{imakeidx}
 because it provides a convenient method of using
 \textsc{splitindex}. You cannot, in fact, use \textsc{splitindex}
-directly with \oscola.} produce the necessary tables.
+directly with \oscola.} produce the necessary tables. If you are using the
+\textsc{memoir} class, you \emph{must} load \textsc{imakeidx}, to avoid some
+fundamental problems.
 
 The complication is in the word `tries'. The difficulty is that it's
 not obvious how many indexes you want. \textsc{Oscola} leaves you
@@ -1905,7 +1920,9 @@ fields described in relation to English cases, but
   \index[general]{bibfile@\texttt{.bib} file!number field@\texttt{number field}}
   \index[general]{cases!European Union!case number@\texttt{case number}}
   Enter the case number (or numbers) in the
-  \texttt{number} field. Do not include `Case' or `Joined Cases' in the number field.
+  \texttt{number} field. Do not include `Case' or `Joined Cases' in the number field. This
+  is the number given to the case by the court registry -- not the ECLI number given
+  to the reported decision.
 \item[type] If your case is an ordinary one (ie, `Case' or `Joined
   Cases') you need enter nothing here. If you need to specify
   something unusual (like \texttt{Opinion}) to precede the case
@@ -1917,6 +1934,10 @@ fields described in relation to English cases, but
   some other full report) you can include a citation to the Official
   Journal. Follow the advice set out in relation to Commission
   decisions, below.
+\item[ecli]\index[general]{ECLI number}
+  The ECLI number for the case report. Note that whether the
+  number is used depends on the setting of the option \verb|ecli| to
+  \verb|yes| (the default), \verb|no|, or \verb|only|.
 \item[pagination] You can, if you like, specify \texttt{paragraph};
   but if nothing is entered, paragraph will be assumed.
 \end{description}
@@ -1955,6 +1976,7 @@ variety of simple reported cases.
   date            = {1985},
   journaltitle    = {ECR},
   pages           = {531},
+  ecli            = {EU:C:1985:59},
 }
 \end{verbatim}
 \end{bibexample}
@@ -2950,8 +2972,8 @@ some special indexing. For instance:
 \begin{bibexample}[spbill4]
 \begin{verbatim}
 @misc{spbill4,
-  title        = {SP Bill 4 Abolition of Feudal Tenure etc (Scotland)
-                  Bill [as introduced] Session 1},
+  title        = {SP Bill 4 Abolition of Feudal Tenure etc 
+                  (Scotland) Bill [as introduced] Session 1},
   date         = {1999},
 }
 \end{verbatim}
@@ -3385,8 +3407,8 @@ will be printed, without any narrative.
 @legal{aaland,
   title        = {Convention Relating to the Non-Fortification
                   and Neutralisation of the Aaland Islands},
-  parties      = {{Aaaland Islands} and Germany and Denmark and Estonia
-                  and Finland and France},
+  parties      = {{Aaaland Islands} and Germany and Denmark 
+                  and Estonia and Finland and France},
   lista        = {opened=1921-10-02 and inforce=1922-12-06},
   pagination   = {article},
   volume       = {9},
@@ -3434,11 +3456,12 @@ The `note' form can be used where it is necessary to give additional information
   volume       = {213},
   reporter     = {U.N.T.S.},
   pages        = {221},
-  note         = {as amended by Protocol No 14bis to the Convention 
-                  for the Protection of Human Rights and
-				  Fundamental Freedoms 
-                  (opened for signature 27 May 2009, entered into force
-                   1 September 2009) CETS No 204},
+  note         = {as amended by Protocol No 14bis to the 
+                  Convention for the Protection of Human Rights 
+                  and Fundamental Freedoms 
+                  (opened for signature 27 May 2009, 
+                  entered into force1 September 2009) 
+                  CETS No 204},
   shorthand    = {ECHR},
   entrysubtype = {piltreaty},
 }
@@ -4549,10 +4572,11 @@ The following are the examples from page 41 of \oscola.
 \begin{bibexample}[com895]
 \begin{verbatim}
 @report{com895,
-  title        = {Proposal for a Council Decision on the conclusion,
-                  on behalf of the European Community, of a Protocol
-                  on the Implementation of the Alpine Convention in
-                  the Field of Transport (Transport Protocol)},
+  title      = {Proposal for a Council Decision on the 
+               conclusion, on behalf of the European Community, 
+               of a Protocol on the Implementation of the Alpine 
+               Convention in the Field of Transport 
+               (Transport Protocol)},
   institution  = {Commission},
   number       = {COM (2008) 895 final},
   entrysubtype = {comdoc}
@@ -4578,9 +4602,10 @@ The following are the examples from page 41 of \oscola.
 \begin{bibexample}[com348]
 \begin{verbatim}
 @report{com348,
-  title        = {Proposal for a Council Regulation on jurisdiction
-                  and the recognition and enforcement of judgments 
-                  in civil and commercial matters},
+  title        = {Proposal for a Council Regulation on 
+                  jurisdiction and the recognition and 
+                  enforcement of judgments in civil and 
+                  commercial matters},
   number       = {COM (99) 348 final},
   institution  = {Commission},
   entrysubtype = {comdoc},
@@ -4776,8 +4801,9 @@ consideration, and so a few examples should suffice.
 \begin{verbatim}
 @inproceedings{reliance,
   author       = {McFarlane, Ben and Nolan, Donal},
-  title        = {Remedying Reliance: The Future Development of
-                  Promissory and Proprietary Estoppel in English Law},
+  title        = {Remedying Reliance: The Future Development 
+                  of Promissory and Proprietary Estoppel in 
+                  English Law},
   eventtitle   = {Obligations III conference},
   location     = {Brisbane},
   eventdate    = {2006-07-01},

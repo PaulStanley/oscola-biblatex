@@ -30,6 +30,15 @@
     {\global\toggletrue{bbx@capibid}}
     {\togglefalse{bbx@capibid}}}
 
+\newtoggle{bbx@ecliuse}\newtoggle{bbx@eclionly}
+\DeclareBibliographyOption{ecli}[add]{%
+  \ifstrequal{#1}{no}
+    {\global\togglefalse{bbx@ecliuse}\global\togglefalse{bbx@eclionly}}
+    {\global\toggletrue{bbx@ecliuse}
+     \ifstrequal{#1}{only}
+       {\global\toggletrue{bbx@eclionly}}
+       {}}}
+
 \newcommand{\bbx@juriscitationindexlist}{}
 \listadd{\bbx@juriscitationindexlist}{{eu}{eujuriscitation:index}}
 \listadd{\bbx@juriscitationindexlist}{{echr}{echrjuriscitation}}
@@ -49,11 +58,12 @@
 % We ensure that there will always be a trash index
 \AtEndPreamble{%
   \@ifpackageloaded{imakeidx}{\makeindex[name=trash]}
-     {\@ifpackageloaded{index}{\newindex{trash}{tdx}{tnd}{Miscellaneous}}
-       {\@ifpackageloaded{multind}{\PackageWarning{biblatex-oscola}{Multind is incompatible with biblatex-oscola. Use imakeidx or index}}
-         {\iftoggle{blx@citeindex}
+     {\@ifclassloaded{memoir}{\PackageWarning{biblatex-oscola}{To use indexing with OSCOLA and the memoir class, you need to load imakeidx.}}
+       {\@ifpackageloaded{index}{\newindex{trash}{tdx}{tnd}{Miscellaneous}}
+         {\@ifpackageloaded{multind}{\PackageWarning{biblatex-oscola}{Multind is incompatible with biblatex-oscola. Use imakeidx or index}}
+           {\iftoggle{blx@citeindex}
              {\PackageWarning{biblatex-oscola}
-             {You need to load imakeidx or index. Indexing will probably fail:}}{}}}}}
+             {You need to load imakeidx or index. Indexing will probably fail:}}{}}}}}}
 
 % The bibliography and citation styles use different forms of name
 \AtBeginBibliography{%
@@ -424,6 +434,7 @@
 \DeclareFieldFormat[legislation]{title}{#1}
 \DeclareFieldFormat[legal]{title}{#1}
 \DeclareFieldFormat{untitle}{#1}
+\DeclareFieldFormat{verba}{#1}
 
 \DeclareListFormat[jurisdiction]{extracites}{%
   \extracitedelim #1}
@@ -1290,20 +1301,39 @@
   \printfield{number}}
 
 \newbibmacro*{eu:reportinfo}{%
+  \iftoggle{bbx@eclionly}
+    {\iffieldundef{verba}
+      {\usebibmacro{eu:osreport}}%
+      {\printfield{verba}}}
+    {\usebibmacro{eu:osreport}}}
+
+
+\newbibmacro*{eu:osreport}{%
+  \iftoggle{bbx@ecliuse}
+    {\iffieldundef{verba}
+    {}
+    {\printfield{verba}%
+     \setunit{\addcomma\space}}}%
+    {}%
   \iffieldundef{journaltitle}%
     {\usebibmacro{eu:unreported}}%
     {\usebibmacro{eu:year+vol+report}}}
 
 \newbibmacro*{eu:unreported}{%
-  \ifboolexpr{( test {\iflistundef{institution}}
-                and  test {\iffieldundef{date}}
-                and  test {\iffieldundef{year}} )}
-    {}
-    {\ifboolexpr{( test {\iffieldundef{date}} and test {\iffieldundef{year}} )}
-      {\mkbibparens{\printlist[jurisdiction]{institution}}}
-      {\bbx@unsetpostnotedelim\iflistundef{institution}%
-        {\mkbibparens{\usebibmacro{date}}}%
-        {\printtext{\bibopenparen\printlist[jurisdiction]{institution}\addcomma\space}\usebibmacro{date}\bibcloseparen}}}}
+  \iffieldundef{verba}
+    {\ifboolexpr{( test {\iflistundef{institution}}
+                   and  test {\iffieldundef{date}}
+                   and  test {\iffieldundef{year}} )}
+      {}%
+      {\ifboolexpr{( test {\iffieldundef{date}} and test {\iffieldundef{year}} )}
+        {\mkbibparens{\printlist[jurisdiction]{institution}}}
+        {\bbx@unsetpostnotedelim\iflistundef{institution}%
+          {\mkbibparens{\usebibmacro{date}}}%
+          {\printtext{\bibopenparen%
+                      \printlist[jurisdiction]{institution}\addcomma\space}\usebibmacro{date}\bibcloseparen}}}}
+    {\iftoggle{bbx@ecliuse}
+      {}
+      {\printfield{verba}}}}
 
 \newbibmacro*{eu:year+vol+report}{%
   \iffieldequals{journaltitle}{\ecrreporttitle}%
@@ -1730,7 +1760,7 @@
 \renewbibmacro*{postnote}{%
   \ifboolexpr {test {\iffieldundef{postnote}} or
                test {\iftoggle{cbx@postnoteprinted}}}%
-    {\midsentence}
+    {}%<--- this used to read \midsentence
     {\ifboolexpr{test {\ifnumequal{\value{bbx@suppresspostnotedelim}}{1}}}
        {\setunit{\addspace}%
         \bbx@resetpostnotedelim}
@@ -2943,7 +2973,7 @@
     \field{author}
     \field{editor}
     \field{translator}
-    \list{institution}
+    \field{institution}
     \field{sorttitle}
     \field{title}
     \field{booktitle}
@@ -3051,6 +3081,8 @@
           fieldtarget=institution]
     \step[fieldsource=additionalreports,
           fieldtarget=listb]
+    \step[fieldsource=ecli,
+          fieldtarget=verba]
   }
  \map[overwrite=false]{
    \pertype{legal}

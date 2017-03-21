@@ -53,13 +53,14 @@
     {\usebibmacro{cite:full}}}
 
 \renewbibmacro*{footcite}{%
+  \bbx@resetpostnotedelim%
   \usebibmacro{cite:citepages}%
   \global\togglefalse{cbx:loccit}%
   \ifboolexpr {test {\ifciteseen} or test {\ifciteibid}}
     {\ifboolexpr {test {\iffieldundef{shorthand}} 
                   or test {\bbx@ifnottrackingcites}}
        {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
-          {\usebibmacro{footcite:ibid}}
+          {\usebibmacro{footcite:ibid}\bbx@unsetpostnotedelim}
           {\usebibmacro{footcite:note}}}%
        {\usebibmacro{footcite:shorthand}}}
     {\usebibmacro{footcite:full}%
