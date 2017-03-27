@@ -12,7 +12,6 @@
 % LaTeX <oscola>, LaTeX <oscola>
 %
 %
-
 \documentclass[a4paper,
                11pt,
 	       DIV=1,			   
@@ -20,7 +19,7 @@
 	      {scrartcl}
 
 % SET VERSION NUMBER AND RELEASE DATE
-\def\releasedate{23 March 2017}
+\def\releasedate{1 April 2017}
 \def\versionnumber{1.5}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -68,18 +67,14 @@
 
 \renewcommand{\linespread}{1.2}
 
-% HYPER REF
-
-\usepackage[final=true,colorlinks=true]{hyperref}
-
-
 % Various commands and environments specific to this document
 \newcommand{\oscola}{\textsc{bl-oscola}}
 \newcommand{\biblatex}{\textsc{biblatex}}
 \newcommand{\oscolashort}{\textsc{oscola}\nocite{oscola}}
 \newcounter{egcounter}\setcounter{egcounter}{0}
 
-
+% TYPOGRAPHY
+\usepackage{scrpage2}
 \usepackage[dvipsnames]{xcolor}
 
 % This code from Juanjo's answer at http://www.latex-community.org
@@ -106,6 +101,11 @@
 \newcommand{\egcite}[1]{{\texttt{\textbackslash cite#1}}}
 \newcommand\angledtext[1]{$\langle$\textit{#1}\/$\rangle$}
 
+% HYPER REF
+
+\usepackage[final=true,colorlinks=true]{hyperref}
+
+
 % BIBLIOGRAPHIC RESOURCES
 \addbibresource{oscola-examples.bib}
 
@@ -114,9 +114,8 @@
 \hyphenation{nieu-wen-huis}
 \hyphenation{sti-cht-ing}
 
-% TYPOGRAPHY
-\usepackage{scrpage2}
 
+% Some basic typographical settings
 \deffootnote{1em}{1em}{\thefootnotemark\ }
 \setcounter{secnumdepth}{-1}
 \frenchspacing
@@ -232,7 +231,7 @@ to grapple with all the complexities, and might not be sufficient for
 a work with \emph{extensive} citation of public international law
 materials.
 
-\textsc{Bl-oscola}\index[general]{scope of package!historical cases}
+This style\index[general]{scope of package!historical cases}
 does not include citation forms for Yearbook or historical
 cases\footcite[20--21]{oscola} (other than the \enquote{plain vanilla}
 of the nominate reports and the English Reports). Nor does the package
