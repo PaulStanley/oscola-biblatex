@@ -635,7 +635,7 @@
   \iffieldequals{entrysubtype}{\subtypecourtrules}%
     {\usebibmacro{courtrules}}
     {\ifkeyword{draft}%
-       {\usebibmacro{legislation:bill}}
+       {\usebibmacro{legislation:bill}}%
        {\ifkeyword{eu}%
          {\usebibmacro{eulegislation}}%
          {\printfield[default]{title}%
@@ -1617,13 +1617,11 @@
      \printtext{\mkbibparens{\usebibmacro{sessionyear}}}%
      \newunit%
      \iffieldundef{number}
-     {}
+     {}%
      {\printlist[billprinting]{institution}}%
-    }
+    }%
     {\printtext{\bibopenparen{\bibstring{draft}}
-     \addspace\printdate\bibcloseparen}}
-  \newunit}
-
+     \addspace\printdate\bibcloseparen}}}
 
 \newbibmacro{legislation:note}{%
   \iffieldundef{note}
@@ -1763,7 +1761,7 @@
     {}%<--- this used to read \midsentence
     {\ifboolexpr{test {\ifnumequal{\value{bbx@suppresspostnotedelim}}{1}}}
        {\setunit{\addspace}%
-        \bbx@resetpostnotedelim}
+        \bbx@resetpostnotedelim}%
        {\setunit{\postnotedelim}}%
      \usebibmacro{postnotepagination}}%
      \global\toggletrue{cbx@postnoteprinted}}
