@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+\usepackage[style=oscola,terseinits=true]{biblatex}
+\usepackage[style=british]{csquotes}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\newcommand{\model}{%
+  \par\strut\llap{*~}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex}
+
+\addbibresource{oscola-examples.bib}
+
+\title{OSCOLA Test Document}
+
+\begin{document}
+
+\maketitle
+
+This document contains, one above the other, a handwritten canonically
+correct example of various entry-types, as given in
+\citetitle{oscola}\footcite{oscola} and the \texttt{oscola} version
+for comparison.
+
+\section{Books}
+
+\model Andrew Burrows, \emph{Remedies for Torts and Breach of
+  Contract} (3rd edn, OUP 2004) 317.
+
+\cite[317]{burrows04}.
+
+\model Justine Pila, \enquote{The Value of Authorship in the Digital
+  Environment} in William H Dutton and Paul W Jeffreys (eds),
+\emph{World Wide Research: Reshaping the Sciences and Humanities in
+  the Century of Information} (MIT Press 2010).
+
+\cite{pila10}.
+
+\model John Cartwright, \enquote{The Fiction of the
+  \enquote{Reasonable Man}} in AG Castermans and others (eds),
+\emph{Ex Libris Hans Nieuwenhuis} (Kluwer 2009).
+
+\cite{cartwright09}.
+
+[NB The above uses \texttt{crossref} in the \texttt{.bib} file.]
+
+\section{Cases}
+
+\model \emph{Boulton v Jones} (1857) 2 H\&N 564, 157 ER 232.
+
+\cite{boulton57}.
+
+\model \emph{Henly v Mayor of Lyme} (1828) 5 Bing 91, 107; 130 ER 995,
+1001.
+
+\cite[107|1001]{henly28}.
+
+\printbibliography
+
+\end{document}
+
+%%% Local Variables:
+%%% coding: utf-8
+%%% mode: LaTeX
+%%% End:
