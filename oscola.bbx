@@ -71,30 +71,15 @@
   \DeclareNameAlias{default}{family-given}%
   \DeclareNameAlias{editor}{given-family}}
 
-\renewbibmacro*{name:family-given}[4]{%
-  \ifuseprefix
-    {\usebibmacro{name:delim}{#3#1}%
-     \usebibmacro{name:hook}{#3#1}%
-     \ifblank{#3}{}{%
-       \ifcapital
-         {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
-	 {\mkbibnameprefix{#3}\isdot}%
-       \ifpunctmark{'}{}{\bibnamedelimc}}%
-     \mkbibnamefamily{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}%
-     \ifblank{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}\isdot}}
-    {\usebibmacro{name:delim}{#1}%
-     \usebibmacro{name:hook}{#1}%
-     \mkbibnamefamily{#1}\isdot
-     \ifblank{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}%
-     \ifblank{#2#3}{}{}%
-     \ifblank{#2}{}{\bibnamedelimd\mkbibnamegiven{#2}\isdot}%
-     \ifblank{#3}{}{\bibnamedelimd\mkbibnameprefix{#3}\isdot}}}
+% Github issue 5 refers: Moewe points out that I don't need a redefinition of
+% the name:family-given bibmacro, but can simply do the following
+\renewcommand*{\revsdnamepunct}{}
 
 \DeclareNameAlias{sortname}{family-given}
 
 % This deals with initials: we need to format them without dots 
 % and close together: HLA not H.L.A. or H. L. A. or H L A
+% The terseinits=true setting is not sufficient
 \renewcommand*\bibinitperiod{}
 \renewcommand*\bibinitdelim{}
 \let\oldbibnamedelima\bibnamedelima
@@ -293,7 +278,7 @@
 \renewcommand\newunitpunct{\addspace}
 \renewcommand{\newblockpunct}{\addspace}
 \renewcommand{\subtitlepunct}{\addcolon\addspace}
-\newcommand{\extracitedelim}{,\space}
+\newcommand{\extracitedelim}{\addcomma\space}
 \newcommand\casenotetext{\bibstring{casenote}}
 \newcommand\firstpublishedstr{\bibstring{firstpublished}}
 \newcommand*{\legalstarturl}{\ensuremath{\langle}}
