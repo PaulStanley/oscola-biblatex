@@ -1,7 +1,7 @@
 % Legal Style Citations using OSCOLA
-% Copyright Paul Stanley 2014-2017
-% This work consists of oscola.bbx, english-oscola.lbx, british-oscola.lbx, oscola.cbx 
-% american-oscola.lbx and oscola.ist.
+% Copyright Paul Stanley 2014-2018
+% This work consists of oscola.bbx, english-oscola.lbx, british-oscola.lbx,
+% oscola.cbx, american-oscola.lbx and oscola.ist.
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
 % of this license or (at your option) any later version.
@@ -13,7 +13,7 @@
 % This work has the LPPL maintenance status 'maintained'.
 % The current maintainer of this work is Paul Stanley (pstanley@essexcourt.net)
 
-\ProvidesFile{oscola.bbx}[2017/03/15 v1.5 Biblatex bibliography style for OSCOLA standard]
+\ProvidesFile{oscola.bbx}[2018/03/22 v1.6 Biblatex bibliography style for OSCOLA standard]
 
 \RequireBibliographyStyle{authortitle}
 
@@ -1174,8 +1174,10 @@
      \newunit\newblock}
 
 \newbibmacro{enjuriscitation}{%
-  \usebibmacro{title}%
-  \newunit\newblock
+  \iffieldundef{title}%
+  {}%
+  {\usebibmacro{title}%
+   \newunit\newblock}%
   \usebibmacro{neutralcite}%
   \iffieldundef{journaltitle}% UNREPORTED CASE
     {}%
@@ -1467,8 +1469,8 @@
     \boolean{bbx@year-essential}%
     \) }%
 	{\ifboolexpr{ test {\ifkeyword{sc}} or
-                      test {\iftoggle{bbx:scotstyle}}}
-          {\usebibmacro{year}}
+                      test {\iftoggle{bbx:scotstyle}}}%
+          {\usebibmacro{year}}%
           {\usebibmacro{year}[brackets]}}%
     	{\usebibmacro{year}[parens]}%
 }
@@ -2944,7 +2946,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\DeclareSortingScheme{niyt}{
+\DeclareSortingTemplate{niyt}{
   \sort{
     \field{presort}
   }

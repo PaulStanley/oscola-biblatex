@@ -19,8 +19,8 @@
 	      {scrartcl}
 
 % SET VERSION NUMBER AND RELEASE DATE
-\def\releasedate{1 April 2017}
-\def\versionnumber{1.5}
+\def\releasedate{22 March 2018}
+\def\versionnumber{1.6}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{geometry}
@@ -483,7 +483,9 @@ of `ibid' in successive citations.
   there, then set the \texttt{ibidstyle} option to \texttt{uc}. Please
   note that while this will work reliably with citations created using
   \verb|\footcite| or \verb|\autocite|, if you use the
-  form\begin{verbatim}\footnote{\cite{ ... }}\end{verbatim}the need
+  form
+\begin{verbatim}\footnote{\cite{ ... }}\end{verbatim}
+  the need
   for a capital will not be `picked up' automatically. In such a case,
   if you are using capitals, you will need to insert the command
   \verb|\bibsentence| immediately before the \verb|\cite|. (This is a
@@ -3151,6 +3153,11 @@ Ensure that the title includes the number and the
   the instrument. It is needed to construct a short title, and, even
   if you provide your own, to make sure the instrument is properly
   indexed.
+\item[url]
+  \index[general]{url field!\texttt{url} field!EU legislation@in EU legislation}
+  \index[general]{bibfile@\texttt{.bib} file!url field@\texttt{url} field}
+  \index[general]{eli number@\texttt{eri} number}
+  The EU is moving towards the use of a system of uniform resource location called the \textsc{eli} number. If you want to include this, use the \texttt{url} field, which will be printed unless you have passed the option \verb|url=false| to \biblatex.
 \end{description}
 
 \index[general]{legislation!EU!type field@\texttt{type} field}
