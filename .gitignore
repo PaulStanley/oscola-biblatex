@@ -176,6 +176,7 @@ pip-log.txt
 *.run.xml
 *.ilg
 internaltest.*
+*.synctex.gz
 
 #EMACS
 \#*#
