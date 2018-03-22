@@ -13,7 +13,7 @@ further information about coverage see the documentation.
 The package consists of five principal files (`oscola.bbx`, `oscola.cbx`, and three language definition files,
 `english-oscola.lbx`, `british-oscola.lbx`, and `american-oscola.lbx`). There is also a very short index
 style file, `oscola.ist`. Those files are copyright (c) Paul Stanley
-2012-17.
+2012-18.
 
 This work may be distributed and/or modified under the conditions of
 the LaTeX Project Public License, either version 1.3 of this license
