@@ -1259,7 +1259,9 @@
 \newbibmacro{eulegislation}{%
   \printfield[default]{title}%
   \newunit\newblock%
-  \usebibmacro{eulegref}}
+  \usebibmacro{eulegref}%
+  \newunit\newblock%
+  \usebibmacro{doi+eprint+url}}
 
 \newbibmacro{eulegref}{%
     \ifboolexpr{test {\iffieldequals{journaltitle}{\officialjournaltitle}}
