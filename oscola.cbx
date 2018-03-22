@@ -375,9 +375,6 @@
  {}
  {}
 
-% The following declarations are required for some reason that I cannot
-% understand. Unless so redefined, we get spacing problems with postnotes
-
 \DeclareCiteCommand{\fullcite}
   {\usebibmacro{prenote}}
   {\usebibmacro{cite:full}}
@@ -390,15 +387,12 @@
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
-%\DeclareCiteCommand{\textcite}[\cbx@textcite\footciteref]
-%  {\gdef\cbx@savedkeys{}}
-%  {\ifboolexpr{ test {\ifentrytype{jurisdiction}} or test{\ifentrytype{legislation}} }
-%     {\usebibmacro{title:or:shorttitle}}%
-%     {\printnames{labelname}}%
-%   \xappto\cbx@savedkeys{\thefield{entrykey},}}
-%  {\multinamedelim}
-%  {\protected@xappto\cbx@savedcites{%
-%     [\thefield{prenote}][\thefield{postnote}]{\cbx@savedkeys}}}
+\DeclareCiteCommand{\textcite}
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{title:or:shorttitle}\blx@postpunct@saved%
+    \footnote{\bibfootnotewrapper{\usebibmacro{cite:refonlynote}}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
 
 \newbibmacro{title:or:shorttitle}{%
   \ifciteseen
@@ -420,6 +414,5 @@
       {\ifnameundef{labelname}
         {\printfield[citetitle]{labeltitle}}
         {\printnames{labelname}}}}
-
 
 \endinput
