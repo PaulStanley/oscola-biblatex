@@ -10,8 +10,8 @@ further information about coverage see the documentation.
 
 ## The package
 
-The package consists of four principal files (`oscola.bbx`, `oscola.cbx`,
-`english-oscola.lbx`, and `british-oscola.lbx`) and a very short index
+The package consists of five principal files (`oscola.bbx`, `oscola.cbx`, and three language definition files,
+`english-oscola.lbx`, `british-oscola.lbx`, and `american-oscola.lbx`). There is also a very short index
 style file, `oscola.ist`. Those files are copyright (c) Paul Stanley
 2012-17.
 
@@ -46,6 +46,7 @@ currently installs as follows:
 * `oscola.cbx`: in the package directory `.../tex/latex/oscola`
 * `english-oscola.lbx`: in the package directory `.../tex/latex/oscola`
 * `british-oscola.lbx`: in the package directory `.../tex/latex/oscola`
+* `american-oscola.lbx`: in the package directory `.../tex/latex/oscola`
 * `oscola.pdf` and `oscola.tex`: with documentation under `.../doc/latex/oscola`
 * `oscola.ist`: with the index style files in  `.../makeindex/oscola`
 
@@ -67,3 +68,8 @@ March 2017      Version 1.5    The package has been updated to take
                                have been fixed; experimental support has
                                been added for the use of ECLI numbers
                                in EU cases.
+
+March 2018      Version 1.6    The package has been updated again to take
+                               account of minor changes in Biblatex; various
+                               bugs have been fixed; support for \\textcite has been
+                               improved.
