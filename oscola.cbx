@@ -393,16 +393,15 @@
                 test {\ifentrytype{jurisdiction}}
                 or test {\ifentrytype{legislation}} )
                 }
-     {\ifciteseen
-        {\usebibmacro{title:or:shorttitle}\blx@postpunct@saved%
-         \footnote{\bibfootnotewrapper{\usebibmacro{cite:refonlynote}}}}%
-         {\usebibmacro{title:or:shorttitle}\blx@postpunct@saved%
-          \footnote{\bibfootnotewrapper{\usebibmacro{footcite:save}\usebibmacro{cite:refonlyfull}}}}}
-      {\ifciteseen
-        {\usebibmacro{cite:author}\blx@postpunct@saved%
-         \footnote{\bibfootnotewrapper{\usebibmacro{footcite:note}}}}
-        {\usebibmacro{cite:author}\blx@postpunct@saved%
-         \footnote{\bibfootnotewrapper{\usebibmacro{footcite:save}\usebibmacro{footcite:full}}}}}}
+     {\usebibmacro{title:or:shorttitle}\blx@postpunct@saved%
+         \footnote{\bibfootnotewrapper{\gdef\blx@postpunct@saved{}%
+         \usebibmacro{cite:refonlynote}%
+         \usebibmacro{postnote}}}}%
+      {\usebibmacro{cite:author}\blx@postpunct@saved%
+        \gdef\blx@postpunct@saved{}%
+         \footnote{\bibfootnotewrapper{%
+           \usebibmacro{footcite:note}%
+           \usebibmacro{postnote}}}}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
