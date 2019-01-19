@@ -66,7 +66,6 @@
     {\usebibmacro{footcite:full}%
      \usebibmacro{footcite:save}}}
 
-
 \renewbibmacro*{citeindex}{%
   \ifboolexpr{ test{\ifciteindex} and test{\iftoggle{cbx@weareindexing}}}
     {\indexnames{labelname}%
@@ -110,7 +109,6 @@
   \printtext[bibhyperlink]{%
     \printfield[citetitle]{labeltitle}}}
 	
-
 \newbibmacro*{cite:miscshort}{%
   \iffieldundef{shorttitle}
     {\iffieldundef{journaltitle}
@@ -184,7 +182,6 @@
   {\printtext[bibhyperlink]{\printfield{shorthand}}%
    \bbx@resetpostnotedelim}}%
 
-
 \newbibmacro*{makeshorteu}{%
   \ifboolexpr{ test {\iffieldundef{number}} or test {\iffieldundef{type}} }%
     {\usedriver{}{legislation}}%
@@ -211,7 +208,16 @@
        {\clearfield{title}%
         \clearfield{shorttitle}}%
        {}%
-  \usebibmacro{cite:full}}
+       \usebibmacro{cite:full}}
+
+\newbibmacro*{footcite:ref:juris}{%
+  \bbx@resetpostnotedelim%
+  \ifboolexpr {test {\ifciteseen} or test {\ifciteibid}}
+       {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+          {\footnote{\bibfootnotewrapper{\gdef\blx@postpunct@saved{}\usebibmacro{footcite:ibid}\midsentence\bbx@unsetpostnotedelim\usebibmacro{postnote}}}}
+          {\footnote{\bibfootnotewrapper{\gdef\blx@postpunct@saved{}\usebibmacro{cite:refonlynote}\usebibmacro{postnote}}}}}%
+    {\footnote{\bibfootnotewrapper{\gdef\blx@postpunct@saved{}\usebibmacro{cite:refonlyfull}\usebibmacro{postnote}%
+     \usebibmacro{footcite:save}}}}}
 
 % I've left this, although I think I probably won't use it because
 % it doesn't make sense to have "partial" references going back to 
@@ -393,17 +399,18 @@
                 test {\ifentrytype{jurisdiction}}
                 or test {\ifentrytype{legislation}} )
                 }
-     {\usebibmacro{title:or:shorttitle}\blx@postpunct@saved%
-         \footnote{\bibfootnotewrapper{\gdef\blx@postpunct@saved{}%
-         \usebibmacro{cite:refonlynote}%
-         \usebibmacro{postnote}}}}%
+                {\usebibmacro{title:or:shorttitle}\blx@postpunct@saved%
+                  \ifboolexpr{ (
+                    test {\ifentrytype{legislation}}
+                      and test {\iffieldundef{postnote}} 
+                    ) }
+                    {}
+                    {\usebibmacro{footcite:ref:juris}}}
       {\usebibmacro{cite:author}\blx@postpunct@saved%
         \gdef\blx@postpunct@saved{}%
-         \footnote{\bibfootnotewrapper{%
-           \usebibmacro{footcite:note}%
-           \usebibmacro{postnote}}}}}
+        \usebibmacro{footcite:ref:juris}}}
   {\multicitedelim}
-  {\usebibmacro{postnote}}
+  {}
 
 \newbibmacro{cite:author}{%
     \ifnameundef{labelname}
@@ -420,7 +427,10 @@
        {}}%
      {\printfield{shorttitle}}}%
    {\printfield{shorthand}}}%
-  {\printfield{title}}}
+ {\printfield{title}%
+   \ifentrytype{legislation}
+   {\newunit\usebibmacro{date}}
+   {}}}
 
 \renewbibmacro{textcite}{%
   \ifentrytype{jurisdiction}
