@@ -212,6 +212,7 @@
 
 \newbibmacro*{footcite:ref:juris}{%
   \bbx@resetpostnotedelim%
+  \usebibmacro{citeindex}%
   \ifboolexpr {test {\ifciteseen} or test {\ifciteibid}}
        {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
           {\footnote{\bibfootnotewrapper{\gdef\blx@postpunct@saved{}\usebibmacro{footcite:ibid}\midsentence\bbx@unsetpostnotedelim\usebibmacro{postnote}}}}
