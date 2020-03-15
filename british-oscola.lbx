@@ -2,11 +2,12 @@
 % Part of the OSCOLA package for biblatex: see the file
 % oscola.lbx for copyright and licence information
 
-\ProvidesFile{british-oscola.lbx}[2019/01/20 v 1.6 Biblatex localisation file for OSCOLA citations]
-
-\InheritBibliographyExtras{british}
+\ProvidesFile{british-oscola.lbx}
+[2019/01/20 v 1.6 Biblatex localisation file for OSCOLA citations]
 
 \DeclareRedundantLanguages{english,american,british}{english,american,british}
+
+\InheritBibliographyExtras{british}
 
 \NewBibliographyString{regulation,
                        regulations,
@@ -75,7 +76,7 @@
       {\mkdatezeros{\thefield{#2}}%
        \iffieldundef{#3}
          {\iffieldundef{#1}{}{/}}
-	 {/}}%
+         {/}}%
     \iffieldundef{#3}
       {}
       {\mkdatezeros{\thefield{#3}}%
@@ -93,55 +94,70 @@
     \lbx@us@mkbibrangetruncextra@long{long}}%
   \protected\def\mkbibrangeterseextra{%
     \lbx@us@mkbibrangetruncextra@short{short}}%
-    \protected\gdef\lbx@us@mkbibrangetrunc@short#1#2{%
-  \iffieldundef{#2year}
-    {}
-    {\printtext{%
-       \iffieldsequal{#2year}{#2endyear}
-	 {\csuse{mkbibdate#1}{}{#2month}{#2day}}
-	 {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
-       \iffieldundef{#2endyear}
-	 {}
-	 {\iffieldequalstr{#2endyear}{}
-            {\mbox{\bibdatedash}}
-	    {\bibdatedash
-	     \csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}}}}
-
-\protected\gdef\lbx@us@mkbibrangetruncextra@long#1#2{%
-  \iffieldundef{#2year}
-    {}
-    {\printtext{%
-       \iffieldsequal{#2year}{#2endyear}
-	 {\csuse{mkbibdate#1}{}{#2month}{#2day}}
-	 {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
-       \iffieldundef{#2endyear}
-	 {\printfield{extrayear}}
-	 {\iffieldequalstr{#2endyear}{}
-            {\printfield{extrayear}%
-	     \mbox{\bibdatedash}}
-	    {\bibdatedash
-	     \iffieldsequal{#2year}{#2endyear}
-	       {\iffieldsequal{#2month}{#2endmonth}
-        	  {\csuse{mkbibdate#1}{#2endyear}{}{#2endday}}
-		  {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}
-	       {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}%
-	     \printfield{extrayear}}}}}}
-
-\protected\gdef\lbx@us@mkbibrangetruncextra@short#1#2{%
-  \iffieldundef{#2year}
-    {}
-    {\printtext{%
-       \iffieldsequal{#2year}{#2endyear}
-	 {\csuse{mkbibdate#1}{}{#2month}{#2day}}
-	 {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
-       \iffieldundef{#2endyear}
-	 {\printfield{extrayear}}
-	 {\iffieldequalstr{#2endyear}{}
-            {\printfield{extrayear}%
-	     \mbox{\bibdatedash}}
-	    {\bibdatedash
-	     \csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}%
-	     \printfield{extrayear}}}}}}
+  \protected\gdef\lbx@us@mkbibrangetrunc@long#1#2{%
+    \iffieldundef{#2year}
+      {}
+      {\printtext{%
+         \iffieldsequal{#2year}{#2endyear}
+           {\csuse{mkbibdate#1}{}{#2month}{#2day}}
+           {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
+         \iffieldundef{#2endyear}
+           {}
+           {\iffieldequalstr{#2endyear}{}
+              {\mbox{\bibdatedash}}
+              {\bibdatedash
+               \iffieldsequal{#2year}{#2endyear}
+                 {\iffieldsequal{#2month}{#2endmonth}
+                    {\csuse{mkbibdate#1}{#2endyear}{}{#2endday}}
+                    {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}
+                 {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}}}}}%
+  \protected\gdef\lbx@us@mkbibrangetrunc@short#1#2{%
+    \iffieldundef{#2year}
+      {}
+      {\printtext{%
+         \iffieldsequal{#2year}{#2endyear}
+           {\csuse{mkbibdate#1}{}{#2month}{#2day}}
+           {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
+         \iffieldundef{#2endyear}
+           {}
+           {\iffieldequalstr{#2endyear}{}
+              {\mbox{\bibdatedash}}
+              {\bibdatedash
+               \csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}}}}%
+  \protected\gdef\lbx@us@mkbibrangetruncextra@long#1#2{%
+    \iffieldundef{#2year}
+      {}
+      {\printtext{%
+         \iffieldsequal{#2year}{#2endyear}
+           {\csuse{mkbibdate#1}{}{#2month}{#2day}}
+           {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
+         \iffieldundef{#2endyear}
+           {\printfield{extrayear}}
+           {\iffieldequalstr{#2endyear}{}
+              {\printfield{extrayear}%
+               \mbox{\bibdatedash}}
+              {\bibdatedash
+               \iffieldsequal{#2year}{#2endyear}
+                 {\iffieldsequal{#2month}{#2endmonth}
+                    {\csuse{mkbibdate#1}{#2endyear}{}{#2endday}}
+                    {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}
+                 {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}%
+               \printfield{extrayear}}}}}}%
+  \protected\gdef\lbx@us@mkbibrangetruncextra@short#1#2{%
+    \iffieldundef{#2year}
+      {}
+      {\printtext{%
+         \iffieldsequal{#2year}{#2endyear}
+           {\csuse{mkbibdate#1}{}{#2month}{#2day}}
+           {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
+         \iffieldundef{#2endyear}
+           {\printfield{extrayear}}
+           {\iffieldequalstr{#2endyear}{}
+              {\printfield{extrayear}%
+               \mbox{\bibdatedash}}
+              {\bibdatedash
+               \csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}%
+               \printfield{extrayear}}}}}}%
 }
 
 \UndeclareBibliographyExtras{%
@@ -529,7 +545,7 @@
   abstract         = {{abstract}{abstract}},
   annotation       = {{annotations}{annotations}},
   eucase           = {{Case}{Case}},
-  eujoinedcases	   = {{Joined Cases}{Joined Cases}},
+  eujoinedcases    = {{Joined Cases}{Joined Cases}},
   commissiondecision = {{Commission Decision}{Commission Decision}},
   article          = {{article}{art}},
   articles         = {{articles}{arts}},
@@ -550,23 +566,5 @@
   casenote         = {{note}{note}},
   firstpublished   = {{first published}{first published}}, 
 }
-
-\protected\gdef\lbx@us@mkbibrangetrunc@long#1#2{%
-  \iffieldundef{#2year}
-    {}
-    {\printtext{%
-       \iffieldsequal{#2year}{#2endyear}
-	 {\csuse{mkbibdate#1}{}{#2month}{#2day}}
-	 {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
-       \iffieldundef{#2endyear}
-	 {}
-	 {\iffieldequalstr{#2endyear}{}
-            {\mbox{\bibdatedash}}
-	    {\bibdatedash
-	     \iffieldsequal{#2year}{#2endyear}
-	       {\iffieldsequal{#2month}{#2endmonth}
-        	  {\csuse{mkbibdate#1}{#2endyear}{}{#2endday}}
-		  {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}
-	       {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}}}}}
 
 \endinput
