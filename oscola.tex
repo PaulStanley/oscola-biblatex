@@ -19,8 +19,8 @@
 	      {scrartcl}
 
 % SET VERSION NUMBER AND RELEASE DATE
-\def\releasedate{20 January 2019}
-\def\versionnumber{1.6}
+\def\releasedate{15 March 2019}
+\def\versionnumber{1.7}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{geometry}
@@ -351,11 +351,11 @@ order.\index[general]{Biblatex!introduction
 Basic use of \oscola\ will require:
 \begin{itemize}
 \item The \textsc{biblatex} package. This is to be found in any modern
-  \TeX\ distribution. You need version 3.9 (or higher).\index[general]{Biblatex!version 3.9 required}\index[general]{prerequisites!Biblatex}
-\item The files \texttt{oscola.bbx}, \texttt{oscola.cbx} and
-  \texttt{english-oscola.lbx}, installed where \LaTeX\ can find them.\index[general]{oscola.bbx@\texttt{oscola.bbx}}\index[general]{oscola.cbx@\texttt{oscola.cbx}}\index[general]{english-oscola.lbx@\texttt{english-oscola.lbx}}\index[general]{prerequisites!package files}
+  \TeX\ distribution. You need version 3.14 (or higher).\index[general]{Biblatex!version 3.14 required}\index[general]{prerequisites!Biblatex}
+\item The files \texttt{oscola.bbx}, \texttt{oscola.cbx}, \texttt{american-oscola.lbx}, \texttt{british-oscola.lbx} and
+  \texttt{english-oscola.lbx}, installed where \LaTeX\ can find them.\index[general]{oscola.bbx@\texttt{oscola.bbx}}\index[general]{oscola.cbx@\texttt{oscola.cbx}}\index[general]{american-oscola.lbx@\texttt{american-oscola.lbx}}\index[general]{british-oscola.lbx@\texttt{british-oscola.lbx}}\index[general]{english-oscola.lbx@\texttt{english-oscola.lbx}}\index[general]{prerequisites!package files}
 \item A working version of \textsc{biber}; this is also to be found in
-  any modern \TeX\ distribution. You need version 1.0 (or higher).\index[general]{prerequisites!Biber}\index[general]{Biber!version 1.0 required}
+  any modern \TeX\ distribution. You need version 2.14 (or higher).\index[general]{prerequisites!Biber}\index[general]{Biber!version 2.14 required}
 \end{itemize}
 
 If you intend to use the facilities that the package offers to produce
@@ -383,12 +383,14 @@ automatic tables of cases and legislation, you will also need:
 \index[general]{oscola.bbx@\texttt{oscola.bbx}}
 \index[general]{oscola.cbx@\texttt{oscola.cbx}}
 \index[general]{oscola.ist@\texttt{oscola.ist}}
-\index[general]{english-oscola.ist@\texttt{english-oscola.ist}}
+\index[general]{american-oscola.lbx@\texttt{american-oscola.lbx}}
+\index[general]{british-oscola.lbx@\texttt{british-oscola.lbx}}
+\index[general]{english-oscola.lbx@\texttt{english-oscola.lbx}}
 I would suggest installation in your (local) \TeX\ directory as follows:
 \begin{description}
-\item The operational files (that is \verb|oscola.bbx|, \verb|oscola.cbx|, \verb|english-oscola.lbx| and \verb|british-oscola.lbx| go with \LaTeX\ macros under \verb|.../tex/latex/oscola|.
+\item The operational files (that is \verb|oscola.bbx|, \verb|oscola.cbx|, \verb|american-oscola.lbx|, \verb|british-oscola.lbx| and \verb|english-oscola.lbx|) go with \LaTeX\ macros under \verb|.../tex/latex/oscola|.
 \item The index style file \verb|oscola.idx| goes with other such files under \verb|.../makeindex/oscola|.
-\item The documentation files (\verb|oscola.tex| and \verb|oscola.pdf| go under \verb|.../doc/latex/oscola|.
+\item The documentation files (\verb|oscola.tex|, \verb|oscola-examples.bib| and \verb|oscola.pdf|) go under \verb|.../doc/latex/oscola|.
 \end{description}
 
 \section{Basic Use}
@@ -5034,9 +5036,9 @@ will produce
 
 \clearpage
 
-\addcontentsline{toc}{section}{Appendices}
-
 \appendix
+\phantomsection
+\addcontentsline{toc}{section}{Appendices}
 
 \section{Licence}
 
@@ -5046,6 +5048,8 @@ The \oscola\ package for \biblatex\ consists of the following files:
 \begin{itemize}
 \item \texttt{oscola.bbx}
 \item \texttt{oscola.cbx}
+\item \texttt{american-oscola.lbx}
+\item \texttt{british-oscola.lbx}
 \item \texttt{english-oscola.lbx}
 \item \texttt{oscola.ist}
 \end{itemize}
@@ -5208,13 +5212,14 @@ At the end of the document, we specify the indexes to be printed.
 \printindex[pmats]    % UK parliamentary material and
 \end{verbatim}
 
-I then run \texttt{latex}, \texttt{biber}, \texttt{latex}, \texttt{splitindex} and finally \texttt{latex} again. The document's `general' index is generated separately using individual indexing commands. In order to deal with the styling, I run \textsc{splitindex} with the options \texttt{-- -s oscola} (which generates indexes with dot leaders), and then separately run \textsc{makeindex} on \texttt{oscola-documentation-general} to produce the general index.
+I then run \texttt{latex}, \texttt{biber}, \texttt{latex}, \texttt{splitindex} and finally \texttt{latex} again. The document's `general' index is generated separately using individual indexing commands. In order to deal with the styling, I run \textsc{splitindex} with the options \verb|-- -s oscola| (which generates indexes with dot leaders), and then separately run \textsc{makeindex} on \texttt{oscola-documentation-general} to produce the general index.
 
 \clearpage
-\addcontentsline{toc}{section}{Table of Examples}
+
 {\def\indexname{Table of Examples}
 
 \begin{theindex}
+\addcontentsline{toc}{section}{Table of Examples}
 
 References are to examples, which are numbered in the margin.
 \bigskip
@@ -5338,9 +5343,8 @@ References are to examples, which are numbered in the margin.
 
 \clearpage
 
-\addcontentsline{toc}{section}{Bibliography}
-
-\printbibliography[nottype=jurisdiction,
+\printbibliography[heading=bibintoc,
+                   nottype=jurisdiction,
                    nottype=legislation,
                    nottype=legal,
                    notsubtype=parliamentary,

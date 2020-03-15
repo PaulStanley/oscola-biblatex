@@ -1,7 +1,7 @@
 # Summary
 
-The Oscola package works (only!) with Biblatex (v 2.0 or later) and
-Biber (v 1.0 or later). It aims to implement, almost completely, the
+The Oscola package works (only!) with Biblatex (v3.14 or later) and
+Biber (v2.14 or later). It aims to implement, almost completely, the
 OSCOLA style of legal citation, according to the
 [4th edition](https://www.law.ox.ac.uk/sites/files/oxlaw/oscola_4th_edn_hart_2012.pdf). For
 further information about coverage see the documentation.
@@ -13,13 +13,13 @@ further information about coverage see the documentation.
 The package consists of five principal files (`oscola.bbx`, `oscola.cbx`, and three language definition files,
 `english-oscola.lbx`, `british-oscola.lbx`, and `american-oscola.lbx`). There is also a very short index
 style file, `oscola.ist`. Those files are copyright (c) Paul Stanley
-2012-18.
+2012-20.
 
 This work may be distributed and/or modified under the conditions of
 the LaTeX Project Public License, either version 1.3 of this license
 or (at your option) any later version.
 
-The latest version of the license is in [available online](http://www.latex-project.org/lppl.txt) 
+The latest version of the license is in [available online](http://www.latex-project.org/lppl.txt)
 and version 1.3 or later is part of all distributions of LaTeX version 2005/12/01 or later.
 
 This work has the LPPL maintenance status 'maintained'. The current
@@ -56,7 +56,7 @@ August 2012     Version 1      Original release
 
 May 2013        Version 1.2    Various bugfixes, and implementation
                                of citation scheme for UN documents
-							   
+
 October 2013    Version 1.3    Corrected spacing bug
 
 May 2014        Version 1.4    Various bugs have been fixed, an additional
@@ -73,3 +73,6 @@ March 2018      Version 1.6    The package has been updated again to take
                                account of minor changes in Biblatex; various
                                bugs have been fixed; support for \\textcite has been
                                improved.
+
+March 2020      Version 1.7    The package has been updated to take
+                               account of changes in Biblatex.
