@@ -1265,13 +1265,19 @@
         {\printfield[brackets]{year}%
          \setunit{\addspace}%
          \printfield{journaltitle}%
-         \setunit{\addspace}
+         \setunit{\addspace}%
          \iffieldundef{series}
            {\printtext{L}}%
            {\printfield[default]{series}}%
-         \usebibmacro{issue/volume}%
-         \printtext{\slash}%
-         \printfield{pages}%
+         \usebibmacro{issue/volume}
+         \ifboolexpr{
+           test {\ifboolexpr{not test {\iffieldundef{issue}} or not test {\iffieldundef{volume}}}}
+         }%
+         {%
+           \printtext{\slash}%
+           \printfield{pages}%
+         }%
+         {}%
          \bbx@resetpostnotedelim}
         {\usebibmacro{year+vol+report}}}
 
